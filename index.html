@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adv. Indrajit Vasant Chavan — Legal Workspace</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Nunito:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --t1:#002B22; --t2:#003D2E; --t3:#00614A; --t4:#008060; --t5:#00A37A;
+  --tl:#E6F7F2; --tl2:#C5EEE3; --tl3:#90DCCA;
+  --gold:#C4972A; --gold2:#E8BC5A;
+  --ink:#0A1A14; --mid:#1A3D30; --muted:#4A7A6A;
+  --bdr:#A0CCBB; --bdr2:#CCE8DC; --bg:#F0FAF6; --white:#fff;
+  --red:#8B1A1A; --redf:#FFF0F0;
+  --orange:#7A3800; --orangef:#FFF5E0;
+  --shadow: 0 2px 12px rgba(0,61,46,.10);
+}
+body { font-family:'Nunito','Noto Sans Devanagari',sans-serif; background:var(--bg); color:var(--ink); min-height:100vh; display:flex; flex-direction:column; }
+button, input, select, textarea { font-family:inherit; }
+button { cursor:pointer; }
+::-webkit-scrollbar { width:4px; } ::-webkit-scrollbar-thumb { background:var(--tl3); border-radius:4px; }
+
+/* === HEADER === */
+.hdr { background:linear-gradient(135deg,var(--t1),var(--t2) 40%,var(--t3) 80%,var(--t4)); box-shadow:0 3px 18px rgba(0,0,0,.28); position:sticky; top:0; z-index:200; }
+.hdr-inner { display:flex; align-items:center; justify-content:space-between; padding:0 18px; min-height:60px; gap:10px; flex-wrap:wrap; }
+.hdr-brand { display:flex; align-items:center; gap:11px; }
+.hdr-icon { width:42px; height:42px; border-radius:50%; background:linear-gradient(145deg,var(--gold),var(--gold2)); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; box-shadow:0 2px 8px rgba(0,0,0,.25); border:2px solid rgba(255,255,255,.2); }
+.hdr-name { font-family:'Cinzel',serif; font-size:16px; font-weight:700; color:var(--gold2); letter-spacing:.6px; line-height:1.2; }
+.hdr-desg { font-size:9px; color:rgba(255,255,255,.55); letter-spacing:1px; text-transform:uppercase; margin-top:2px; }
+.hdr-center { flex:1; text-align:center; display:none; }
+@media(min-width:840px) { .hdr-center { display:block; } }
+.hdr-app { font-family:'Cinzel',serif; font-size:13px; font-weight:700; color:var(--gold2); }
+.hdr-app-sub { font-size:9px; color:rgba(255,255,255,.45); letter-spacing:1px; text-transform:uppercase; margin-top:2px; }
+.hdr-right { display:flex; gap:6px; align-items:center; flex-wrap:wrap; flex-shrink:0; }
+.hbtn { background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.18); color:white; padding:5px 11px; border-radius:6px; font-size:10px; font-weight:700; transition:.18s; white-space:nowrap; }
+.hbtn:hover { background:rgba(255,255,255,.22); }
+.hbtn.gold { background:linear-gradient(135deg,var(--gold),var(--gold2)); border:none; color:var(--t1); }
+.hbtn.green { background:linear-gradient(135deg,var(--t3),var(--t4)); border:none; color:white; }
+.lang-row { display:flex; gap:5px; align-items:center; }
+.lb { border:1.5px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); color:rgba(255,255,255,.7); padding:4px 10px; border-radius:16px; font-size:10px; font-weight:700; transition:.18s; cursor:pointer; }
+.lb.on { background:white; color:var(--t3); border-color:white; }
+.lb:hover:not(.on) { background:rgba(255,255,255,.2); }
+.auto-pill { display:flex; align-items:center; gap:5px; background:rgba(0,200,150,.2); border:1px solid rgba(0,200,150,.35); color:rgba(255,255,255,.8); padding:3px 9px; border-radius:16px; font-size:9px; font-weight:700; }
+.auto-dot { width:6px; height:6px; border-radius:50%; background:#00C896; animation:blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+.gold-bar { height:3px; background:linear-gradient(90deg,transparent,var(--gold),var(--gold2),var(--gold),transparent); }
+
+/* === NAV TABS === */
+.nav { background:var(--t1); display:flex; padding:0 18px; overflow-x:auto; border-bottom:3px solid rgba(0,0,0,.2); flex-shrink:0; }
+.ntab { padding:10px 14px; font-size:11px; font-weight:700; color:rgba(255,255,255,.4); border:none; background:none; border-bottom:3px solid transparent; margin-bottom:-3px; transition:.18s; white-space:nowrap; display:flex; align-items:center; gap:5px; cursor:pointer; }
+.ntab:hover { color:rgba(255,255,255,.8); }
+.ntab.active { color:var(--gold2); border-bottom-color:var(--gold); }
+
+/* === VIEWS === */
+.view { display:none; flex:1; overflow-y:auto; padding:16px; flex-direction:column; gap:14px; }
+.view.active { display:flex; }
+
+/* === CARDS === */
+.card { background:var(--white); border-radius:10px; border:1.5px solid var(--bdr2); box-shadow:var(--shadow); overflow:hidden; }
+.card-hdr { background:linear-gradient(135deg,var(--t1),var(--t2)); color:white; padding:10px 16px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.card-hdr h3 { font-family:'Cinzel',serif; font-size:12px; font-weight:700; display:flex; align-items:center; gap:6px; }
+.card-body { padding:15px; }
+.card-body.sm { padding:12px; }
+
+/* === FORM === */
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.g3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.ff { grid-column:1/-1; }
+.fg { display:flex; flex-direction:column; gap:4px; }
+.fg label { font-size:10px; font-weight:800; color:var(--t3); text-transform:uppercase; letter-spacing:.4px; }
+.fi { border:1.5px solid var(--bdr); border-radius:7px; padding:7px 10px; font-size:12px; color:var(--ink); background:white; outline:none; width:100%; transition:.18s; }
+.fi:focus { border-color:var(--t4); box-shadow:0 0 0 2px rgba(0,128,96,.1); }
+.fi.ro { background:var(--tl); border-color:var(--tl3); color:var(--t2); font-weight:700; }
+textarea.fi { resize:vertical; min-height:52px; }
+select.fi { cursor:pointer; }
+
+/* === BUTTONS === */
+.btn { padding:7px 14px; border-radius:7px; border:none; font-size:11px; font-weight:700; transition:.18s; display:inline-flex; align-items:center; gap:5px; cursor:pointer; }
+.btn-p { background:var(--t3); color:white; } .btn-p:hover { background:var(--t2); }
+.btn-s { background:var(--tl); color:var(--t3); border:1.5px solid var(--bdr); } .btn-s:hover { background:var(--tl2); }
+.btn-gold { background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--t1); } .btn-gold:hover { filter:brightness(1.07); }
+.btn-r { background:var(--redf); color:var(--red); border:1.5px solid #FFCDD2; } .btn-r:hover { background:#FFCDD2; }
+.btn-full { width:100%; justify-content:center; }
+.calc-btn { width:100%; padding:11px; background:linear-gradient(135deg,var(--t2),var(--t4)); color:white; border:none; border-radius:9px; font-size:14px; font-weight:800; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; margin-top:8px; box-shadow:0 3px 12px rgba(0,97,74,.22); transition:.18s; }
+.calc-btn:hover { filter:brightness(1.07); transform:translateY(-1px); }
+
+/* === RESULT BOX === */
+.result-box { border-radius:9px; padding:12px 15px; }
+.rb-safe { background:linear-gradient(135deg,var(--t2),var(--t4)); color:white; }
+.rb-warn { background:linear-gradient(135deg,#7A5000,#B87800); color:white; }
+.rb-danger { background:linear-gradient(135deg,#6B0000,#9E1A1A); color:white; }
+.rb-icon { font-size:30px; margin-bottom:5px; }
+.rb-title { font-family:'Cinzel',serif; font-size:14px; font-weight:700; margin-bottom:4px; }
+.rb-desc { font-size:11px; opacity:.85; line-height:1.6; }
+
+/* === RESULT ROWS === */
+.rrow { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:1px solid var(--tl2); font-size:12px; }
+.rrow:last-child { border-bottom:none; }
+.rrow-lbl { color:var(--muted); font-weight:600; }
+.rrow-val { font-weight:800; color:var(--t2); }
+.rrow-good { color:var(--t3); } .rrow-bad { color:var(--red); } .rrow-warn { color:#8A6000; }
+
+/* === RECEIPT PREVIEW === */
+.receipt-card { border:2px solid var(--bdr2); border-radius:10px; padding:16px; background:white; }
+.receipt-hdr { background:linear-gradient(135deg,var(--t1),var(--t2),var(--t3)); color:white; border-radius:7px; padding:13px 16px; text-align:center; margin-bottom:11px; }
+.receipt-name { font-family:'Cinzel',serif; font-size:16px; font-weight:700; color:var(--gold2); }
+.receipt-desg { font-size:9px; color:rgba(255,255,255,.6); text-transform:uppercase; letter-spacing:.8px; margin-top:2px; }
+.receipt-addr { font-size:9.5px; color:rgba(255,255,255,.5); margin-top:3px; line-height:1.5; }
+.receipt-badge { display:inline-block; background:rgba(196,151,42,.25); border:1px solid rgba(196,151,42,.5); color:var(--gold2); padding:2px 12px; border-radius:14px; font-size:9px; font-weight:700; margin-top:6px; }
+.receipt-meta { display:flex; justify-content:space-between; background:var(--tl); border-radius:6px; padding:7px 11px; margin-bottom:9px; font-size:11px; }
+.rline { display:flex; justify-content:space-between; align-items:flex-start; padding:5px 0; border-bottom:1px solid var(--bdr2); font-size:11px; }
+.rline:last-child { border-bottom:none; }
+.rl-lbl { color:var(--muted); font-weight:600; min-width:100px; }
+.rl-val { font-weight:700; color:var(--ink); text-align:right; flex:1; }
+.receipt-amt { background:var(--t2); color:white; border-radius:7px; padding:9px 13px; text-align:center; margin:9px 0; }
+.receipt-amt-num { font-family:'Cinzel',serif; font-size:20px; font-weight:700; color:var(--gold2); }
+.receipt-amt-words { font-size:9px; color:rgba(255,255,255,.6); margin-top:2px; }
+.receipt-sig { display:flex; justify-content:space-between; align-items:flex-end; margin-top:11px; padding-top:9px; border-top:1px dashed var(--bdr); font-size:9.5px; color:var(--muted); }
+.sig-line { border-top:1px solid var(--ink); width:110px; padding-top:3px; text-align:center; font-size:9px; color:var(--mid); }
+
+/* === ALERT BOXES === */
+.alert { padding:8px 12px; border-radius:7px; font-size:11px; line-height:1.6; margin-top:6px; }
+.alert-s { background:var(--tl2); border:1px solid var(--tl3); color:var(--t2); }
+.alert-w { background:#FFF3E0; border:1px solid #FFCC80; color:#7A4000; }
+.alert-d { background:var(--redf); border:1px solid #FFCDD2; color:var(--red); }
+.alert-i { background:var(--gold2)1A; background:#FFFDE7; border:1px solid #FFE082; color:#5D3500; }
+
+/* === DEADLINE TIMELINE === */
+.tl { display:flex; flex-direction:column; gap:0; padding-left:24px; position:relative; }
+.tl::before { content:''; position:absolute; left:9px; top:8px; bottom:8px; width:2px; background:linear-gradient(to bottom,var(--t4),var(--tl3)); }
+.tl-item { display:flex; gap:11px; align-items:flex-start; padding:7px 0; position:relative; }
+.tl-dot { position:absolute; left:-24px; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; z-index:1; border:2px solid white; box-shadow:0 1px 6px rgba(0,0,0,.15); }
+.tl-g { background:var(--t3); color:white; }
+.tl-gold { background:linear-gradient(145deg,var(--gold),var(--gold2)); color:var(--t1); }
+.tl-org { background:linear-gradient(145deg,#C46200,#E87A00); color:white; }
+.tl-red { background:linear-gradient(145deg,var(--red),#C62828); color:white; }
+.tl-grey { background:linear-gradient(145deg,#6B8A80,#9AB5AA); color:white; }
+.tl-content { flex:1; }
+.tl-label { font-size:9px; font-weight:800; color:var(--muted); text-transform:uppercase; letter-spacing:.4px; margin-bottom:2px; }
+.tl-date { font-family:'Cinzel',serif; font-size:14px; font-weight:700; color:var(--t2); margin-bottom:2px; }
+.tl-desc { font-size:11px; color:var(--mid); line-height:1.55; }
+.tl-badge { display:inline-block; padding:2px 8px; border-radius:14px; font-size:9px; font-weight:800; margin-top:3px; text-transform:uppercase; }
+.tbg { background:var(--tl2); color:var(--t2); } .tbo { background:#FFF3E0; color:#7A4000; } .tbr { background:var(--redf); color:var(--red); }
+.days-row { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
+.day-box { background:white; border:1.5px solid var(--bdr2); border-radius:8px; padding:10px; text-align:center; box-shadow:var(--shadow); }
+.day-num { font-family:'Cinzel',serif; font-size:22px; font-weight:700; line-height:1; margin-bottom:3px; }
+.day-lbl { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.3px; color:var(--muted); }
+.dg { color:var(--t3); } .dw { color:#B87800; } .dr { color:var(--red); }
+
+/* === ROLE GRID === */
+.role-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:3px; }
+.rbtn { padding:8px 6px; border-radius:7px; border:2px solid var(--bdr2); background:white; font-size:11px; font-weight:700; color:var(--muted); transition:.15s; cursor:pointer; text-align:center; line-height:1.3; }
+.rbtn.on { border-color:var(--t4); background:var(--tl); color:var(--t2); }
+.rbtn:hover:not(.on) { border-color:var(--tl3); }
+.rbtn-sub { font-size:9px; font-weight:600; opacity:.6; display:block; margin-top:1px; }
+
+/* === MODAL === */
+.overlay { position:fixed; inset:0; background:rgba(0,20,15,.6); backdrop-filter:blur(4px); z-index:1000; display:flex; align-items:flex-start; justify-content:center; padding:14px; overflow-y:auto; }
+.overlay.hidden { display:none; }
+.modal { background:white; border-radius:12px; box-shadow:0 18px 55px rgba(0,0,0,.25); width:100%; max-width:680px; margin:auto; display:flex; flex-direction:column; overflow:hidden; max-height:88vh; }
+.modal.slim { max-width:440px; }
+.modal-hdr { background:linear-gradient(135deg,var(--t1),var(--t2)); color:white; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+.modal-hdr h3 { font-family:'Cinzel',serif; font-size:13px; font-weight:700; display:flex; align-items:center; gap:6px; }
+.modal-close { background:rgba(255,255,255,.15); border:none; color:white; width:26px; height:26px; border-radius:5px; font-size:14px; cursor:pointer; }
+.modal-close:hover { background:rgba(255,255,255,.3); }
+.modal-body { padding:16px; overflow-y:auto; flex:1; }
+.modal-foot { padding:10px 16px; background:var(--tl); border-top:1px solid var(--bdr2); display:flex; gap:7px; justify-content:flex-end; flex-shrink:0; flex-wrap:wrap; }
+.mfb { padding:8px 17px; border-radius:7px; border:none; font-weight:700; font-size:12px; cursor:pointer; transition:.18s; }
+.mfb-p { background:var(--t3); color:white; } .mfb-p:hover { background:var(--t2); }
+.mfb-gold { background:linear-gradient(135deg,var(--gold),var(--gold2)); color:var(--t1); }
+.mfb-x { background:white; color:var(--muted); border:1.5px solid var(--bdr); } .mfb-x:hover { background:var(--tl); }
+
+/* === RECORDS LIST === */
+.rec-item { background:white; border:1.5px solid var(--bdr2); border-radius:8px; padding:10px 13px; display:flex; justify-content:space-between; align-items:center; gap:10px; cursor:pointer; transition:.15s; margin-bottom:6px; }
+.rec-item:hover { border-color:var(--t4); background:var(--tl); }
+.rec-title { font-weight:800; font-size:12px; color:var(--t2); }
+.rec-meta { font-size:10px; color:var(--muted); margin-top:2px; }
+.rec-tag { padding:2px 8px; border-radius:9px; font-size:9px; font-weight:800; text-transform:uppercase; color:white; flex-shrink:0; }
+.rt-receipt { background:var(--t3); } .rt-s138 { background:#8A6000; } .rt-appeal { background:#1A4CAA; } .rt-order22 { background:var(--red); }
+.rec-acts { display:flex; gap:5px; flex-shrink:0; }
+.rba { padding:4px 9px; border-radius:5px; border:none; font-size:10px; font-weight:700; cursor:pointer; transition:.15s; }
+.rba-v { background:var(--tl2); color:var(--t3); } .rba-v:hover { background:var(--t4); color:white; }
+.rba-e { background:var(--tl); color:var(--t4); border:1px solid var(--bdr); } .rba-e:hover { background:var(--t4); color:white; }
+.rba-d { background:var(--redf); color:var(--red); border:1px solid #FFCDD2; } .rba-d:hover { background:#FFCDD2; }
+
+/* === PREVIEW DETAIL ROWS === */
+.prow { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid var(--tl2); font-size:12px; }
+.prow:last-child { border-bottom:none; }
+.prow-lbl { color:var(--muted); font-weight:600; min-width:130px; }
+.prow-val { font-weight:700; color:var(--ink); text-align:right; flex:1; }
+.psec { font-size:10px; font-weight:800; color:var(--t3); text-transform:uppercase; letter-spacing:.5px; margin:11px 0 5px; display:flex; align-items:center; gap:7px; }
+.psec::after { content:''; flex:1; height:1.5px; background:var(--tl3); }
+
+/* === LAW BOX === */
+.law-box { background:var(--tl); border:1.5px solid var(--tl3); border-radius:9px; padding:11px 13px; }
+.law-box h4 { font-family:'Cinzel',serif; font-size:11px; font-weight:700; color:var(--t2); margin-bottom:7px; display:flex; align-items:center; gap:5px; }
+.law-li { display:flex; gap:6px; font-size:11px; color:var(--mid); line-height:1.65; margin-bottom:4px; }
+.law-dot { width:5px; height:5px; border-radius:50%; background:var(--t4); margin-top:7px; flex-shrink:0; }
+
+/* === TOAST === */
+.toast { position:fixed; bottom:18px; left:50%; transform:translateX(-50%) translateY(80px); background:var(--t1); color:white; padding:9px 20px; border-radius:26px; font-size:12px; font-weight:700; z-index:9999; transition:transform .28s; box-shadow:0 3px 14px rgba(0,0,0,.28); pointer-events:none; }
+.toast.show { transform:translateX(-50%) translateY(0); }
+
+/* === HOME CARDS === */
+.home-cards { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.home-card { background:white; border-radius:10px; border:1.5px solid var(--bdr2); box-shadow:var(--shadow); padding:16px; cursor:pointer; transition:all .2s; }
+.home-card:hover { border-color:var(--t4); transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,61,46,.14); }
+.home-card-ico { font-size:32px; margin-bottom:9px; }
+.home-card-title { font-family:'Cinzel',serif; font-size:14px; font-weight:700; color:var(--t2); margin-bottom:5px; }
+.home-card-desc { font-size:11px; color:var(--muted); line-height:1.65; }
+
+/* === PRINT === */
+#print-area { display:none; }
+@media print {
+  * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+  body * { visibility:hidden !important; }
+  #print-area, #print-area * { visibility:visible !important; }
+  #print-area { display:block !important; position:fixed !important; top:0 !important; left:0 !important; width:100% !important; padding:0 !important; background:white !important; z-index:99999 !important; }
+  @page { margin:9mm; size:A4; }
+}
+.footer { background:var(--t1); color:rgba(255,255,255,.4); text-align:center; padding:8px; font-size:10px; line-height:1.8; flex-shrink:0; }
+.footer strong { color:var(--gold2); }
+
+@media(max-width:640px) { .g2,.g3,.home-cards,.role-grid,.days-row { grid-template-columns:1fr; } }
+
+<!-- FIREBASE SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+
+/* === FIREBASE STATUS === */
+.fb-status { display:flex; align-items:center; gap:6px; padding:4px 10px; border-radius:14px; font-size:9px; font-weight:700; }
+.fb-online { background:rgba(0,200,150,.15); color:#00C896; border:1px solid rgba(0,200,150,.3); }
+.fb-offline { background:rgba(200,50,50,.15); color:#FF6B6B; border:1px solid rgba(200,50,50,.3); }
+.fb-dot { width:6px; height:6px; border-radius:50%; }
+.fb-online .fb-dot { background:#00C896; }
+.fb-offline .fb-dot { background:#FF6B6B; }
+
+/* === BACKUP SECTION === */
+.backup-section { background:var(--white); border:1.5px solid var(--bdr2); border-radius:10px; padding:14px; margin-top:14px; }
+.backup-section h4 { font-family:'Cinzel',serif; font-size:11px; font-weight:700; color:var(--t2); margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+.backup-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media(max-width:600px) { .backup-grid { grid-template-columns:1fr; } }
+.backup-tile { background:var(--tl); border:1.5px solid var(--tl3); border-radius:9px; padding:12px; }
+.backup-tile.cloud { background:linear-gradient(135deg,#E8F0FF,#D0E0FF); border-color:#A0C0F0; }
+.backup-tile h5 { font-size:11px; font-weight:800; color:var(--t2); margin-bottom:4px; }
+.backup-tile p { font-size:10px; color:var(--muted); margin-bottom:8px; line-height:1.5; }
+.btn-blue { background:linear-gradient(135deg,#1A4B8B,#2B6BC0); color:white; } .btn-blue:hover { filter:brightness(1.1); }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-inner">
+    <div class="hdr-brand">
+      <div class="hdr-icon">⚖️</div>
+      <div>
+        <div class="hdr-name">Adv. Indrajit Vasant Chavan</div>
+        <div class="hdr-desg">Advocate · Ichalkaranji, Maharashtra · 8055284444</div>
+      </div>
+    </div>
+    <div class="hdr-center">
+      <div class="hdr-app">Legal Workspace</div>
+      <div class="hdr-app-sub">All-in-One Legal Tools · Origo Application Services</div>
+    </div>
+    <div class="hdr-right">
+      <span id="fb-status" class="fb-status fb-offline"><span class="fb-dot"></span>FB: Offline</span>
+          <div class="auto-pill"><span class="auto-dot"></span><span id="save-lbl">Saved</span></div>
+      <div class="lang-row">
+        <button class="lb on" id="lb-en" onclick="setLang('en')">English</button>
+        <button class="lb" id="lb-mr" onclick="setLang('mr')">मराठी</button>
+      </div>
+      <button class="hbtn" onclick="openBackup()">📦 Backup</button>
+      <button class="hbtn" onclick="openRecords()">📂 Records</button>
+      <button class="hbtn gold" onclick="printCurrent()">🖨️ Print</button>
+    </div>
+  </div>
+  <div class="gold-bar"></div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="ntab active" id="tab-home" onclick="goTab('home')">🏠 <span id="nav-home">Home</span></button>
+  <button class="ntab" id="tab-receipt" onclick="goTab('receipt')">🧾 <span id="nav-receipt">Fee Receipt</span></button>
+  <button class="ntab" id="tab-s138" onclick="goTab('s138')">📄 <span id="nav-s138">Sec. 138</span></button>
+  <button class="ntab" id="tab-appeal" onclick="goTab('appeal')">⏱️ <span id="nav-appeal">Appeal/Revision</span></button>
+  <button class="ntab" id="tab-order22" onclick="goTab('order22')">☠️ <span id="nav-order22">Order 22 LR</span></button>
+</nav>
+
+<!-- ═══ HOME ═══ -->
+<div class="view active" id="view-home">
+  <div style="background:linear-gradient(135deg,var(--t1),var(--t2));color:white;border-radius:12px;padding:20px;text-align:center">
+    <div style="font-size:36px;margin-bottom:8px">⚖️</div>
+    <div style="font-family:'Cinzel',serif;font-size:20px;font-weight:700;color:var(--gold2);margin-bottom:6px" id="home-title">Legal Workspace</div>
+    <div style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.7" id="home-sub">All legal tools in one place — Fee Receipts, Section 138 NI Act, Appeal Calculators, Order 22 LR</div>
+  </div>
+  <div class="home-cards">
+    <div class="home-card" onclick="goTab('receipt')">
+      <div class="home-card-ico">🧾</div>
+      <div class="home-card-title" id="hc-receipt">Fee Receipt</div>
+      <div class="home-card-desc" id="hc-receipt-desc">Issue professional fee receipts with amount in words, print instantly.</div>
+    </div>
+    <div class="home-card" onclick="goTab('s138')">
+      <div class="home-card-ico">📄</div>
+      <div class="home-card-title" id="hc-s138">Section 138 NI Act</div>
+      <div class="home-card-desc" id="hc-s138-desc">Court fee calculator + limitation period for dishonoured cheque cases.</div>
+    </div>
+    <div class="home-card" onclick="goTab('appeal')">
+      <div class="home-card-ico">⏱️</div>
+      <div class="home-card-title" id="hc-appeal">Appeal / Revision</div>
+      <div class="home-card-desc" id="hc-appeal-desc">Calculate delay with CC exclusion. For 30-day appeals and 90-day revisions.</div>
+    </div>
+    <div class="home-card" onclick="goTab('order22')">
+      <div class="home-card-ico">☠️</div>
+      <div class="home-card-title" id="hc-o22">Order 22 LR</div>
+      <div class="home-card-desc" id="hc-o22-desc">LR substitution & abatement deadlines. 30/60/90 days from date of death.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><h3>💡 Tips</h3></div>
+    <div class="card-body sm">
+      <div class="g2" style="font-size:11px;color:var(--mid);line-height:1.8">
+        <div>🔄 All data auto-saves every 5 seconds.</div>
+        <div>📦 Use Backup to export / import all records.</div>
+        <div>🖨️ Print always fits in 1 page.</div>
+        <div>📂 Records panel — click View or Edit on any saved case.</div>
+      </div>
+    </div>
+  
+  <div class="backup-section">
+    <h4>🔐 Backup &amp; Restore Center</h4>
+    <div class="backup-grid">
+      <div class="backup-tile">
+        <h5>📥 Local JSON Backup</h5>
+        <p>Download all records as a JSON file. Works offline.</p>
+        <button class="btn btn-gold btn-full" onclick="exportAll()">⬇️ Download Backup</button>
+      </div>
+      <div class="backup-tile">
+        <h5>📤 Local JSON Restore</h5>
+        <p>Restore from a downloaded backup file.</p>
+        <button class="btn btn-p btn-full" onclick="openBackup()">⬆️ Restore from File</button>
+      </div>
+      <div class="backup-tile cloud">
+        <h5>☁️ Cloud Backup (Firebase)</h5>
+        <p>Push all records to Firebase Firestore.</p>
+        <button class="btn btn-blue btn-full" onclick="firebaseCloudBackup()" id="btn-cloud-backup">☁️ Upload to Cloud</button>
+      </div>
+      <div class="backup-tile cloud">
+        <h5>☁️ Cloud Restore (Firebase)</h5>
+        <p>Pull records from Firebase Firestore.</p>
+        <button class="btn btn-blue btn-full" onclick="firebaseCloudRestore()" id="btn-cloud-restore">☁️ Download from Cloud</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FEE RECEIPT ═══ -->
+<div class="view" id="view-receipt">
+  <div class="g2" style="align-items:start">
+    <div class="card">
+      <div class="card-hdr"><h3>🧾 <span id="rp-title">Issue Fee Receipt</span></h3></div>
+      <div class="card-body">
+        <div class="g2" style="margin-bottom:9px">
+          <div class="fg"><label id="lbl-rno">Receipt No.</label><input class="fi" id="r-num" oninput="updateReceipt()"></div>
+          <div class="fg"><label id="lbl-rdate">Date</label><input class="fi" id="r-date" type="date" oninput="updateReceipt()"></div>
+        </div>
+        <div class="fg" style="margin-bottom:9px"><label id="lbl-rclient">Client Full Name *</label><input class="fi" id="r-client" placeholder="Mr. Suresh Patil" oninput="updateReceipt()"></div>
+        <div class="fg" style="margin-bottom:9px"><label id="lbl-raddr">Client Address</label><input class="fi" id="r-addr" placeholder="Address, City" oninput="updateReceipt()"></div>
+        <div class="fg" style="margin-bottom:9px"><label id="lbl-rdesc">Description of Services</label><textarea class="fi" id="r-desc" rows="3" oninput="updateReceipt()"></textarea></div>
+        <div class="g2" style="margin-bottom:9px">
+          <div class="fg"><label id="lbl-ramt">Fee Amount (₹)</label><input class="fi" id="r-amt" type="number" value="5000" oninput="updateReceipt()"></div>
+          <div class="fg"><label id="lbl-rmode">Payment Mode</label>
+            <select class="fi" id="r-mode" onchange="updateReceipt()">
+              <option>Cash</option><option>UPI</option><option selected>NEFT / Bank Transfer</option><option>Cheque</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex;gap:7px;flex-wrap:wrap">
+          <button class="btn btn-gold" onclick="printReceipt()">🖨️ <span id="btn-print-r">Print Receipt</span></button>
+          <button class="btn btn-p" onclick="saveReceipt()">💾 <span id="btn-save-r">Save</span></button>
+          <button class="btn btn-s" onclick="resetReceipt()">🔄</button>
+        </div>
+      </div>
+    </div>
+    <div class="receipt-card" id="receipt-preview">
+      <div class="receipt-hdr">
+        <div class="receipt-name">Indrajit Vasant Chavan</div>
+        <div class="receipt-desg">Advocate &amp; Legal Consultant</div>
+        <div class="receipt-addr">9/21/3 Building, Mahasatta Chowk, Amarai Road, Ichalkaranji<br>📞 +91 8055284444 · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f19e9797989294c3c5c3c3c0c3c2b1969c90989ddf929e9c">[email&#160;protected]</a></div>
+        <div class="receipt-badge">⚖️ FEE RECEIPT (ORIGINAL)</div>
+      </div>
+      <div class="receipt-meta">
+        <div><span style="font-size:9px;font-weight:800;color:var(--muted);text-transform:uppercase">Receipt No.</span><br><strong id="dp-num">—</strong></div>
+        <div style="text-align:right"><span style="font-size:9px;font-weight:800;color:var(--muted);text-transform:uppercase">Date</span><br><strong id="dp-date">—</strong></div>
+      </div>
+      <div class="rline"><span class="rl-lbl">Client</span><span class="rl-val" id="dp-client">—</span></div>
+      <div class="rline"><span class="rl-lbl">Address</span><span class="rl-val" id="dp-addr">—</span></div>
+      <div class="rline"><span class="rl-lbl">Services</span><span class="rl-val" id="dp-desc">—</span></div>
+      <div class="receipt-amt">
+        <div class="receipt-amt-num" id="dp-amt">₹0.00</div>
+        <div class="receipt-amt-words" id="dp-words">Zero Rupees Only</div>
+      </div>
+      <div class="rline"><span class="rl-lbl">Payment Mode</span><span class="rl-val" id="dp-mode">—</span></div>
+      <div class="receipt-sig">
+        <div>Received with thanks</div>
+        <div class="sig-line">For Indrajit Vasant Chavan<br>(Authorised Signatory)</div>
+      </div>
+      <div style="text-align:center;font-size:9px;color:var(--muted);margin-top:7px;font-style:italic">Computer-generated receipt · Origo Application Services</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 138 ═══ -->
+<div class="view" id="view-s138">
+  <div class="card">
+    <div class="card-hdr"><h3>💰 <span id="s1-title">Court Fee — Sec. 138 NI Act</span></h3></div>
+    <div class="card-body">
+      <div class="g3">
+        <div class="fg"><label id="lbl-camt">Cheque Amount (₹) *</label><input class="fi" id="c-amt" type="number" placeholder="e.g. 50000" oninput="calcCourtFee()"></div>
+        <div class="fg"><label id="lbl-cfee">Court Fee Payable</label><input class="fi ro" id="c-fee" readonly></div>
+        <div class="fg"><label id="lbl-cseg">Blocks (÷ ₹10,000)</label><input class="fi ro" id="c-seg" readonly></div>
+      </div>
+      <div id="c-fee-box" style="display:none" class="alert alert-s"></div>
+      <div class="law-box" style="margin-top:9px">
+        <h4>📖 <span id="cf-law-title">Legal Basis</span></h4>
+        <div class="law-li"><div class="law-dot"></div><span id="cf-law1">Maharashtra Court Fees Act — Schedule I, Article 18: ₹200 per ₹10,000 (or part). Maximum cap: ₹1,50,000.</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hdr"><h3>📅 <span id="s2-title">Limitation Period — Sec. 138 NI Act</span></h3></div>
+    <div class="card-body">
+      <div class="g2">
+        <div class="fg"><label id="lbl-sclient">Client Name</label><input class="fi" id="s-client" placeholder="Client name"></div>
+        <div class="fg"><label id="lbl-scaseno">Case / CC No.</label><input class="fi" id="s-caseno" placeholder="CC No."></div>
+        <div class="fg"><label id="lbl-schqdate">Date of Cheque *</label><input class="fi" id="s-chqdate" type="date" oninput="autoCalc138()"></div>
+        <div class="fg"><label id="lbl-svalid">Validity (days)</label><input class="fi" id="s-valid" type="number" value="90" oninput="autoCalc138()"></div>
+        <div class="fg"><label id="lbl-sdepdate">Date of Deposit *</label><input class="fi" id="s-depdate" type="date" oninput="autoCalc138()"></div>
+        <div class="fg"><label id="lbl-sretdate">Date of Dishonour *</label><input class="fi" id="s-retdate" type="date" oninput="autoCalc138()"></div>
+        <div class="fg"><label id="lbl-snotp">Notice Period (days)</label><input class="fi" id="s-notp" type="number" value="30" oninput="autoCalc138()"></div>
+        <div class="fg"><label id="lbl-snotsent">Notice Sent Date *</label><input class="fi" id="s-notsent" type="date" oninput="autoCalc138()"></div>
+        <div class="fg"><label id="lbl-snotserved">Notice Served Date *</label><input class="fi" id="s-notserved" type="date" oninput="autoCalc138()"></div>
+        <div class="fg"><label id="lbl-scompdate">Complaint Filed Date *</label><input class="fi" id="s-compdate" type="date" oninput="autoCalc138()"></div>
+        <div class="fg"><label id="lbl-svaliduntil">Valid Until (Auto)</label><input class="fi ro" id="s-validuntil" readonly></div>
+        <div class="fg"><label id="lbl-slastnotice">Last Date Notice (Auto)</label><input class="fi ro" id="s-lastnotice" readonly></div>
+        <div class="fg"><label id="lbl-swaitend">15-Day Wait Ends (Auto)</label><input class="fi ro" id="s-waitend" readonly></div>
+        <div class="fg"><label id="lbl-slastcomp">Last Date Complaint (Auto)</label><input class="fi ro" id="s-lastcomp" readonly></div>
+      </div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:4px">
+        <button class="calc-btn" style="flex:2;margin-top:0" onclick="calcLim138()">⚖️ <span id="btn-calc138">Calculate</span></button>
+        <button class="btn btn-p" onclick="save138();saveDB()">💾 <span id="btn-save138">Save</span></button>
+        <button class="btn btn-s" onclick="printS138()">🖨️</button>
+        <button class="btn btn-s" onclick="reset138()">🔄</button>
+      </div>
+      <div id="s138-result" style="display:none;margin-top:12px;flex-direction:column;gap:10px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ APPEAL ═══ -->
+<div class="view" id="view-appeal">
+  <div class="g2" style="align-items:start">
+    <div class="card">
+      <div class="card-hdr"><h3>⏱️ <span id="ap-title">Appeal / Revision Delay Calculator</span></h3></div>
+      <div class="card-body">
+        <div class="g2">
+          <div class="fg ff"><label id="lbl-apclient">Client Name</label><input class="fi" id="ap-client" placeholder="Client name"></div>
+          <div class="fg ff"><label id="lbl-apcaseno">Case / Appeal No.</label><input class="fi" id="ap-caseno" placeholder="e.g. RA No. 12/2024"></div>
+          <div class="fg"><label id="lbl-aptype">Case Type</label>
+            <select class="fi" id="ap-type" onchange="updateApLim()">
+              <option value="appeal" data-days="30" id="opt-appeal">Appeal (30 days)</option>
+              <option value="revision" data-days="90" id="opt-revision">Revision (90 days)</option>
+              <option value="custom" data-days="0" id="opt-custom">Custom</option>
+            </select>
+          </div>
+          <div class="fg"><label id="lbl-aplimdays">Limitation (days)</label><input class="fi" id="ap-limdays" type="number" value="30"></div>
+          <div class="fg"><label id="lbl-aporder">Order Date *</label><input class="fi" id="ap-order" type="date" oninput="calcAppeal()"></div>
+          <div class="fg"><label id="lbl-apccasked">CC Asked Date *</label><input class="fi" id="ap-ccasked" type="date" oninput="calcAppeal()"></div>
+          <div class="fg"><label id="lbl-apccrecd">CC Received Date *</label><input class="fi" id="ap-ccrecd" type="date" oninput="calcAppeal()"></div>
+          <div class="fg"><label id="lbl-apfiled">Appeal Filed Date *</label><input class="fi" id="ap-filed" type="date" oninput="calcAppeal()"></div>
+        </div>
+        <div style="display:flex;gap:7px;margin-top:9px;flex-wrap:wrap">
+          <button class="calc-btn" style="flex:2;margin-top:0" onclick="calcAppeal()">⚖️ <span id="btn-calcap">Calculate</span></button>
+          <button class="btn btn-p" onclick="saveAppeal();saveDB()">💾 <span id="btn-saveap">Save</span></button>
+          <button class="btn btn-s" onclick="printAppeal()">🖨️</button>
+          <button class="btn btn-s" onclick="resetAppeal()">🔄</button>
+        </div>
+      </div>
+    </div>
+    <div id="ap-result" style="display:none;flex-direction:column;gap:10px">
+      <div id="ap-banner" class="result-box"></div>
+      <div class="card">
+        <div class="card-hdr"><h3>📊 Results</h3></div>
+        <div class="card-body sm" id="ap-rows"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ORDER 22 ═══ -->
+<div class="view" id="view-order22">
+  <div class="g2" style="align-items:start">
+    <div style="display:flex;flex-direction:column;gap:13px">
+      <div class="card">
+        <div class="card-hdr"><h3>📋 <span id="o22-case-title">Case Details</span></h3></div>
+        <div class="card-body">
+          <div class="g2">
+            <div class="fg"><label id="lbl-o22client">Client Name *</label><input class="fi" id="o22-client" placeholder="Party name"></div>
+            <div class="fg"><label id="lbl-o22casenum">Case Number</label><input class="fi" id="o22-casenum" placeholder="e.g. RCS 123/2024"></div>
+            <div class="fg"><label id="lbl-o22court">Court</label><input class="fi" id="o22-court" placeholder="Court name"></div>
+            <div class="fg"><label id="lbl-o22opp">Opposite Party</label><input class="fi" id="o22-opp" placeholder="Opposite party"></div>
+            <div class="fg ff"><label id="lbl-o22nature">Nature of Suit</label><input class="fi" id="o22-nature" placeholder="e.g. Money Recovery, Partition"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hdr"><h3>☠️ <span id="o22-dec-title">Deceased Party</span></h3></div>
+        <div class="card-body">
+          <div class="fg" style="margin-bottom:10px"><label id="lbl-o22deceased">Name of Deceased *</label><input class="fi" id="o22-deceased" placeholder="Full name of deceased person"></div>
+          <div class="fg" style="margin-bottom:10px">
+            <label id="lbl-o22role">Role of Deceased *</label>
+            <div class="role-grid" id="o22-role-grid">
+              <button class="rbtn" data-role="Plaintiff" onclick="setO22Role(this)">Plaintiff<span class="rbtn-sub">Civil Suit</span></button>
+              <button class="rbtn" data-role="Defendant" onclick="setO22Role(this)">Defendant<span class="rbtn-sub">Civil Suit</span></button>
+              <button class="rbtn" data-role="Applicant" onclick="setO22Role(this)">Applicant<span class="rbtn-sub">Misc.</span></button>
+              <button class="rbtn" data-role="Opponent" onclick="setO22Role(this)">Opponent<span class="rbtn-sub">Misc.</span></button>
+              <button class="rbtn" data-role="Appellant" onclick="setO22Role(this)">Appellant<span class="rbtn-sub">Appeal</span></button>
+              <button class="rbtn" data-role="Respondent" onclick="setO22Role(this)">Respondent<span class="rbtn-sub">Appeal</span></button>
+            </div>
+          </div>
+          <div class="g2">
+            <div class="fg"><label id="lbl-o22dod">Date of Death *</label><input class="fi" id="o22-dod" type="date" oninput="calcO22()"></div>
+            <div class="fg"><label id="lbl-o22today">Today's Date</label><input class="fi" id="o22-today" type="date" oninput="calcO22()"></div>
+            <div class="fg ff"><label id="lbl-o22abat">Abatement Order Date (if passed)</label><input class="fi" id="o22-abatdate" type="date" oninput="calcO22()"></div>
+            <div class="fg ff"><label id="lbl-o22notes">Notes</label><input class="fi" id="o22-notes" placeholder="Any special circumstances..."></div>
+          </div>
+          <div style="display:flex;gap:7px;margin-top:9px;flex-wrap:wrap">
+            <button class="calc-btn" style="flex:2;margin-top:0" onclick="calcO22()">⚖️ <span id="btn-calco22">Calculate LR Deadlines</span></button>
+            <button class="btn btn-p" onclick="saveO22();saveDB()">💾</button>
+            <button class="btn btn-s" onclick="printO22()">🖨️</button>
+            <button class="btn btn-s" onclick="resetO22()">🔄</button>
+          </div>
+        </div>
+      </div>
+      <div class="law-box card" style="overflow:hidden">
+        <div class="card-body sm">
+          <h4 style="font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--t2);margin-bottom:7px;display:flex;align-items:center;gap:5px">📖 <span id="o22-law-title">Order 22 CPC</span></h4>
+          <div class="law-li"><div class="law-dot"></div><span id="o22-l1">Rule 4: LR application within 90 days. Suit ABATES if not filed.</span></div>
+          <div class="law-li"><div class="law-dot"></div><span id="o22-l2">Article 120: 90 days from date of death (Limitation Act 1963).</span></div>
+          <div class="law-li"><div class="law-dot"></div><span id="o22-l3">Rule 9: Set aside abatement within 60 days of abatement order.</span></div>
+          <div class="law-li"><div class="law-dot"></div><span id="o22-l4">Deepak Verma v. Daya Nand (2019): Limitation runs from date of DEATH, not knowledge.</span></div>
+        </div>
+      </div>
+    </div>
+    <div id="o22-result" style="display:none;flex-direction:column;gap:12px"></div>
+  </div>
+</div>
+
+<!-- ═══ MODALS ═══ -->
+
+<!-- BACKUP MODAL -->
+<div class="overlay hidden" id="m-backup">
+  <div class="modal slim">
+    <div class="modal-hdr"><h3>📦 Backup &amp; Restore</h3><button class="modal-close" onclick="closeModal('m-backup')">✕</button></div>
+    <div class="modal-body">
+      <div style="background:var(--tl);border:1.5px solid var(--tl3);border-radius:9px;padding:12px;margin-bottom:10px">
+        <div style="font-size:12px;font-weight:800;color:var(--t2);margin-bottom:4px">📤 Export All Data</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.6">Download a JSON file with all saved records.</div>
+        <button class="btn btn-gold btn-full" onclick="exportAll()">⬇️ Download JSON Backup</button>
+      </div>
+      <div style="background:var(--tl);border:1.5px solid var(--tl3);border-radius:9px;padding:12px;margin-bottom:10px">
+        <div style="font-size:12px;font-weight:800;color:var(--t2);margin-bottom:4px">📥 Import / Restore via Text</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:7px">Paste exported JSON to restore:</div>
+        <textarea class="fi" id="imp-json" rows="5" placeholder="Paste JSON here..."></textarea>
+        <button class="btn btn-p btn-full" style="margin-top:7px" onclick="importAll()">⬆️ Import &amp; Restore</button>
+      </div>
+      <div style="background:linear-gradient(135deg,#E8F0FF,#D0E0FF);border:1.5px solid #A0C0F0;border-radius:9px;padding:12px;margin-bottom:10px">
+        <div style="font-size:12px;font-weight:800;color:var(--t2);margin-bottom:4px">📥 Import / Restore via File</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:7px">Select a .json backup file:</div>
+        <input type="file" id="file-import" accept=".json" class="fi" style="margin-bottom:7px" onchange="importFromFile(this)">
+        <div id="file-import-status" style="font-size:10px;color:var(--muted)"></div>
+      </div>
+      <div style="background:linear-gradient(135deg,#E8F0FF,#D0E0FF);border:1.5px solid #A0C0F0;border-radius:9px;padding:12px">
+        <div style="font-size:12px;font-weight:800;color:var(--t2);margin-bottom:4px">☁️ Firebase Cloud Sync</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:7px;line-height:1.6">Sync with Firebase Firestore for cloud backup.</div>
+        <div style="display:flex;gap:7px">
+          <button class="btn btn-blue" style="flex:1" onclick="firebaseCloudBackup()">☁️ Upload</button>
+          <button class="btn btn-blue" style="flex:1" onclick="firebaseCloudRestore()">☁️ Download</button>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="mfb mfb-x" onclick="closeModal('m-backup')">Close</button></div>
+  </div>
+</div>
+
+<!-- RECORDS MODAL -->
+<div class="overlay hidden" id="m-records">
+  <div class="modal">
+    <div class="modal-hdr"><h3>📂 Saved Records</h3><button class="modal-close" onclick="closeModal('m-records')">✕</button></div>
+    <div class="modal-body" style="padding:0">
+      <div style="padding:10px 14px;background:var(--tl);border-bottom:1px solid var(--bdr2);display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+          <button class="btn btn-p" style="padding:4px 11px;font-size:10px;border-radius:12px" id="rf-all" onclick="filterRecs('all')">All</button>
+          <button class="btn btn-s" style="padding:4px 11px;font-size:10px;border-radius:12px" id="rf-receipt" onclick="filterRecs('receipt')">🧾 Receipts</button>
+          <button class="btn btn-s" style="padding:4px 11px;font-size:10px;border-radius:12px" id="rf-s138" onclick="filterRecs('s138')">📄 Sec. 138</button>
+          <button class="btn btn-s" style="padding:4px 11px;font-size:10px;border-radius:12px" id="rf-appeal" onclick="filterRecs('appeal')">⏱️ Appeal</button>
+          <button class="btn btn-s" style="padding:4px 11px;font-size:10px;border-radius:12px" id="rf-order22" onclick="filterRecs('order22')">☠️ Order 22</button>
+          <span id="rec-count" style="margin-left:auto;font-size:10px;color:var(--muted);font-weight:700"></span>
+        </div>
+        <input class="fi" id="rec-search" placeholder="🔍 Search by client name, case number..." oninput="renderRecords()" style="font-size:11px;padding:6px 10px">
+      </div>
+      <div id="records-list" style="padding:10px 12px;max-height:400px;overflow-y:auto"></div>
+      <div id="records-empty" style="display:none;text-align:center;padding:28px;color:var(--muted)">
+        <div style="font-size:34px;margin-bottom:7px">📂</div><div style="font-size:12px">No records found.</div>
+      </div>
+    </div>
+    <div class="modal-foot"><button class="mfb mfb-x" onclick="closeModal('m-records')">Close</button></div>
+  </div>
+</div>
+
+<!-- PREVIEW MODAL -->
+<div class="overlay hidden" id="m-preview">
+  <div class="modal">
+    <div class="modal-hdr">
+      <h3 id="preview-modal-title">📋 Record Details</h3>
+      <div style="display:flex;gap:5px">
+        <button class="modal-close" style="width:auto;padding:0 10px;font-size:10px;font-weight:800" onclick="editCurrentRecord()">✏️ Edit</button>
+        <button class="modal-close" style="width:auto;padding:0 10px;font-size:10px;font-weight:800" onclick="printCurrentRecord()">🖨️ Print</button>
+        <button class="modal-close" onclick="closeModal('m-preview')">✕</button>
+      </div>
+    </div>
+    <div class="modal-body" id="preview-body" style="padding:16px"></div>
+    <div class="modal-foot">
+      <button class="mfb mfb-p" onclick="editCurrentRecord()">✏️ Load &amp; Edit in Form</button>
+      <button class="mfb mfb-x" onclick="closeModal('m-preview')">Close</button>
+    </div>
+  </div>
+</div>
+
+<div id="print-area"><div id="print-content"></div></div>
+<div class="toast" id="toast"></div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+'use strict';
+
+
+// ══ FIREBASE INIT ═════════════════════════════════
+const firebaseConfig = {
+  apiKey: "AIzaSyCvZDDQUOgA687g-a7gcsauJkQN1HMFPg8",
+  authDomain: "legal-work-space.firebaseapp.com",
+  projectId: "legal-work-space",
+  storageBucket: "legal-work-space.firebasestorage.app",
+  messagingSenderId: "351071448032",
+  appId: "1:351071448032:web:61e0592e8b5ec7b0f61985",
+  measurementId: "G-4G1D3Z9P9N"
+};
+
+let firebaseAvailable = false;
+let firestoreDB = null;
+
+try {
+  firebase.initializeApp(firebaseConfig);
+  firestoreDB = firebase.firestore();
+  firebaseAvailable = true;
+  updateFBStatus(true);
+  console.log('✅ Firebase initialized');
+} catch(e) {
+  firebaseAvailable = false;
+  updateFBStatus(false);
+  console.warn('⚠ Firebase init failed:', e.message);
+}
+
+function updateFBStatus(online) {
+  const el = document.getElementById('fb-status');
+  if (!el) return;
+  if (online) {
+    el.className = 'fb-status fb-online';
+    el.innerHTML = '<span class="fb-dot"></span>FB: Online';
+  } else {
+    el.className = 'fb-status fb-offline';
+    el.innerHTML = '<span class="fb-dot"></span>FB: Offline';
+  }
+}
+
+// ══ STATE ══════════════════════════════════════════
+let currentTab = 'home';
+let currentLang = 'en';
+let o22Role = '';
+let currentPreviewRec = null;
+let recFilter = 'all';
+let DB = { receipts:[], s138:[], appeals:[], order22:[] };
+let autoTimer = null;
+
+// ══ LANG ═══════════════════════════════════════════
+const LNG = {
+  en: {
+    'home-title':'Legal Workspace','home-sub':'All legal tools in one place — Fee Receipts, Section 138 NI Act, Appeal Calculators, Order 22 LR',
+    'hc-receipt':'Fee Receipt','hc-s138':'Section 138 NI Act','hc-appeal':'Appeal / Revision','hc-o22':'Order 22 LR',
+    'hc-receipt-desc':'Issue professional fee receipts with amount in words, print instantly.',
+    'hc-s138-desc':'Court fee calculator + limitation period for dishonoured cheque cases.',
+    'hc-appeal-desc':'Calculate delay with CC exclusion. For 30-day appeals and 90-day revisions.',
+    'hc-o22-desc':'LR substitution & abatement deadlines. 30/60/90 days from date of death.',
+    'nav-home':'Home','nav-receipt':'Fee Receipt','nav-s138':'Sec. 138','nav-appeal':'Appeal/Revision','nav-order22':'Order 22 LR',
+    'rp-title':'Issue Fee Receipt','lbl-rno':'Receipt No.','lbl-rdate':'Date','lbl-rclient':'Client Full Name *','lbl-raddr':'Client Address','lbl-rdesc':'Description of Services','lbl-ramt':'Fee Amount (₹)','lbl-rmode':'Payment Mode','btn-print-r':'Print Receipt','btn-save-r':'Save',
+    's1-title':'Court Fee — Sec. 138 NI Act','lbl-camt':'Cheque Amount (₹) *','lbl-cfee':'Court Fee Payable','lbl-cseg':'Blocks (÷ ₹10,000)','cf-law-title':'Legal Basis',
+    'cf-law1':'Maharashtra Court Fees Act — Schedule I, Article 18: ₹200 per ₹10,000. Maximum cap: ₹1,50,000.',
+    's2-title':'Limitation Period — Sec. 138 NI Act','lbl-sclient':'Client Name','lbl-scaseno':'Case / CC No.',
+    'lbl-schqdate':'Date of Cheque *','lbl-svalid':'Validity (days)','lbl-sdepdate':'Date of Deposit *','lbl-sretdate':'Date of Dishonour *',
+    'lbl-snotp':'Notice Period (days)','lbl-snotsent':'Notice Sent *','lbl-snotserved':'Notice Served *','lbl-scompdate':'Complaint Filed *',
+    'lbl-svaliduntil':'Valid Until (Auto)','lbl-slastnotice':'Last Date Notice (Auto)','lbl-swaitend':'15-Day Wait Ends (Auto)','lbl-slastcomp':'Last Date Complaint (Auto)',
+    'btn-calc138':'Calculate','btn-save138':'Save',
+    'ap-title':'Appeal / Revision Delay Calculator','lbl-apclient':'Client Name','lbl-apcaseno':'Case / Appeal No.','lbl-aptype':'Case Type','lbl-aplimdays':'Limitation (days)',
+    'lbl-aporder':'Order Date *','lbl-apccasked':'CC Asked *','lbl-apccrecd':'CC Received *','lbl-apfiled':'Appeal Filed *',
+    'btn-calcap':'Calculate','btn-saveap':'Save',
+    'opt-appeal':'Appeal (30 days)','opt-revision':'Revision (90 days)','opt-custom':'Custom',
+    'o22-case-title':'Case Details','lbl-o22client':'Client Name *','lbl-o22casenum':'Case Number','lbl-o22court':'Court','lbl-o22opp':'Opposite Party','lbl-o22nature':'Nature of Suit',
+    'o22-dec-title':'Deceased Party','lbl-o22deceased':'Name of Deceased *','lbl-o22role':'Role of Deceased *',
+    'lbl-o22dod':'Date of Death *','lbl-o22today':"Today's Date",'lbl-o22abat':'Abatement Order Date (if passed)','lbl-o22notes':'Notes',
+    'btn-calco22':'Calculate LR Deadlines',
+    'o22-law-title':'Order 22 CPC','o22-l1':'Rule 4: LR application within 90 days. Suit ABATES if not filed.','o22-l2':'Article 120: 90 days from date of death (Limitation Act 1963).',
+    'o22-l3':'Rule 9: Set aside abatement within 60 days of abatement order.','o22-l4':'Deepak Verma v. Daya Nand (2019): Limitation runs from date of DEATH, not knowledge.',
+  },
+  mr: {
+    'home-title':'कायदेशीर कार्यक्षेत्र','home-sub':'सर्व कायदेशीर साधने एकत्र — शुल्क पावती, कलम 138 NI Act, अपील, आदेश 22 LR',
+    'hc-receipt':'शुल्क पावती','hc-s138':'कलम 138 NI Act','hc-appeal':'अपील / पुनरीक्षण','hc-o22':'आदेश 22 LR',
+    'hc-receipt-desc':'व्यावसायिक शुल्क पावती तयार करा — रक्कम शब्दात.','hc-s138-desc':'धनादेश बाऊन्स प्रकरणांसाठी न्यायालय शुल्क + मर्यादा कालावधी.',
+    'hc-appeal-desc':'CC वगळून अपील / पुनरीक्षण मर्यादा काढा.','hc-o22-desc':'LR प्रतिस्थापन — मृत्यूपासून 30/60/90 दिवस.',
+    'nav-home':'मुख्यपृष्ठ','nav-receipt':'शुल्क पावती','nav-s138':'कलम 138','nav-appeal':'अपील','nav-order22':'आदेश 22 LR',
+    'rp-title':'शुल्क पावती जारी करा','lbl-rno':'पावती क्रमांक','lbl-rdate':'दिनांक','lbl-rclient':'अशिलाचे पूर्ण नाव *','lbl-raddr':'अशिलाचा पत्ता','lbl-rdesc':'कायदेशीर सेवांचे वर्णन','lbl-ramt':'शुल्क रक्कम (₹)','lbl-rmode':'देयकाची पद्धत','btn-print-r':'पावती प्रिंट करा','btn-save-r':'जतन करा',
+    's1-title':'न्यायालय शुल्क — कलम 138','lbl-camt':'धनादेश रक्कम (₹) *','lbl-cfee':'देय न्यायालय शुल्क','lbl-cseg':'विभाग संख्या','cf-law-title':'कायदेशीर आधार',
+    'cf-law1':'महाराष्ट्र न्यायालय शुल्क कायदा: प्रति ₹10,000 — ₹200. कमाल: ₹1,50,000.',
+    's2-title':'मर्यादा कालावधी — कलम 138','lbl-sclient':'अशिलाचे नाव','lbl-scaseno':'प्रकरण / CC क्रमांक',
+    'lbl-schqdate':'धनादेशाची तारीख *','lbl-svalid':'वैधता (दिवस)','lbl-sdepdate':'जमा तारीख *','lbl-sretdate':'अपमान तारीख *',
+    'lbl-snotp':'नोटीस कालावधी (दिवस)','lbl-snotsent':'नोटीस पाठवलेली *','lbl-snotserved':'नोटीस बजावलेली *','lbl-scompdate':'तक्रार दाखल *',
+    'lbl-svaliduntil':'वैध पर्यंत (ऑटो)','lbl-slastnotice':'अंतिम नोटीस तारीख (ऑटो)','lbl-swaitend':'15 दिवस संपते (ऑटो)','lbl-slastcomp':'अंतिम तक्रार तारीख (ऑटो)',
+    'btn-calc138':'गणना करा','btn-save138':'जतन करा',
+    'ap-title':'अपील / पुनरीक्षण विलंब कॅल्क्युलेटर','lbl-apclient':'अशिलाचे नाव','lbl-apcaseno':'प्रकरण / अपील क्रमांक','lbl-aptype':'प्रकरण प्रकार','lbl-aplimdays':'मर्यादा (दिवस)',
+    'lbl-aporder':'आदेश तारीख *','lbl-apccasked':'CC मागणी *','lbl-apccrecd':'CC प्राप्त *','lbl-apfiled':'दाखल तारीख *',
+    'btn-calcap':'गणना करा','btn-saveap':'जतन करा',
+    'opt-appeal':'अपील (30 दिवस)','opt-revision':'पुनरीक्षण (90 दिवस)','opt-custom':'सानुकूल',
+    'o22-case-title':'प्रकरण तपशील','lbl-o22client':'अशिलाचे नाव *','lbl-o22casenum':'प्रकरण क्रमांक','lbl-o22court':'न्यायालय','lbl-o22opp':'विरोधी पक्ष','lbl-o22nature':'दाव्याचे स्वरूप',
+    'o22-dec-title':'मृत पक्ष','lbl-o22deceased':'मृत व्यक्तीचे नाव *','lbl-o22role':'प्रकरणातील भूमिका *',
+    'lbl-o22dod':'मृत्यूची तारीख *','lbl-o22today':'आजची तारीख','lbl-o22abat':'खंड आदेश तारीख','lbl-o22notes':'नोंदी',
+    'btn-calco22':'LR अंतिम मुदती काढा',
+    'o22-law-title':'आदेश 22 CPC','o22-l1':'नियम 4: 90 दिवसांत LR अर्ज. न केल्यास दावा खंडित.','o22-l2':'अनुच्छेद 120: मृत्यूपासून 90 दिवस.','o22-l3':'नियम 9: खंड आदेशापासून 60 दिवसांत खंड रद्द.','o22-l4':'मर्यादा मृत्यूच्या तारखेपासून — ज्ञानाच्या तारखेपासून नाही.',
+  }
+};
+
+function setLang(l) {
+  currentLang = l;
+  localStorage.setItem('adv_ic_lang', l);
+  document.querySelectorAll('.lb').forEach(b => b.classList.remove('on'));
+  const lb = document.getElementById('lb-' + l);
+  if (lb) lb.classList.add('on');
+  const T = LNG[l] || LNG.en;
+  Object.entries(T).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = val;
+  });
+}
+
+// ══ NAV ════════════════════════════════════════════
+function goTab(name) {
+  currentTab = name;
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.ntab').forEach(t => t.classList.remove('active'));
+  const view = document.getElementById('view-' + name);
+  const tab = document.getElementById('tab-' + name);
+  if (view) { view.classList.add('active'); }
+  if (tab) { tab.classList.add('active'); }
+}
+
+// ══ UTILS ══════════════════════════════════════════
+const g = id => document.getElementById(id);
+const esc = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const fmtD = d => { if(!d) return '—'; try { return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}); } catch { return '—'; } };
+const fmtDS = s => { if(!s) return '—'; try { const[y,m,d]=s.split('-'); return d+'/'+m+'/'+y; } catch { return s; } };
+const addD = (d,n) => { const r=new Date(d); r.setDate(r.getDate()+n); return r; };
+const diffD = (d1,d2) => Math.floor((d2-d1)/86400000);
+const parseD = s => { if(!s) return null; const[y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
+const inr = n => '₹' + (parseFloat(n)||0).toLocaleString('en-IN');
+const today = () => new Date().toISOString().split('T')[0];
+const uid = () => Date.now() + '_' + Math.random().toString(36).slice(2,7);
+
+let _toastTimer;
+function showToast(msg) {
+  const t = g('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(_toastTimer); _toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+function closeModal(id) { g(id).classList.add('hidden'); }
+
+// ══ DB ═════════════════════════════════════════════
+function loadDB() {
+  try { const d = localStorage.getItem('adv_ic_v6'); if(d) DB = JSON.parse(d); } catch(e) {}
+}
+function saveDB() {
+  localStorage.setItem('adv_ic_v6', JSON.stringify(DB));
+  const lbl = g('save-lbl');
+  if (lbl) lbl.textContent = 'Saved ' + new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  // If server is available, save to it too
+  fetch('/api/save', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(DB) }).catch(()=>{});
+}
+function triggerSave() { clearTimeout(autoTimer); autoTimer = setTimeout(saveDB, 5000); }
+
+// ══ NUM TO WORDS ═══════════════════════════════════
+function numToWords(n) {
+  if (!n || isNaN(n)) return 'Zero Rupees Only';
+  const ones = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+  const tens = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+  const b100 = n => { let s=''; if(n>=100){s+=ones[Math.floor(n/100)]+' Hundred ';n%=100;if(n)s+='and ';} if(n>=20){s+=tens[Math.floor(n/10)]+' ';n%=10;} if(n>0&&n<20)s+=ones[n]+' '; return s.trim(); };
+  const conv = n => { let r=''; if(n>=10000000){r+=b100(Math.floor(n/10000000))+' Crore ';n%=10000000;} if(n>=100000){r+=b100(Math.floor(n/100000))+' Lakh ';n%=100000;} if(n>=1000){r+=b100(Math.floor(n/1000))+' Thousand ';n%=1000;} if(n>0)r+=b100(n); return r.trim(); };
+  const int = Math.floor(n), dec = Math.round((n-int)*100);
+  let r = conv(int) + ' Rupee' + (int!==1?'s':'');
+  if (dec>0) r += ' and ' + conv(dec) + ' Paise';
+  return r + ' Only';
+}
+
+// ══ FEE RECEIPT ════════════════════════════════════
+function updateReceipt() {
+  const num = g('r-num').value || 'ICH/---';
+  const dv = g('r-date').value;
+  const client = g('r-client').value.trim() || '—';
+  const addr = g('r-addr').value.trim() || '—';
+  const desc = g('r-desc').value.trim() || '—';
+  const amt = parseFloat(g('r-amt').value) || 0;
+  const mode = g('r-mode').options[g('r-mode').selectedIndex]?.text || '—';
+  g('dp-num').textContent = num;
+  g('dp-date').textContent = dv ? new Date(dv).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}) : '—';
+  g('dp-client').textContent = client;
+  g('dp-addr').textContent = addr;
+  g('dp-desc').textContent = desc;
+  g('dp-amt').textContent = '₹' + amt.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});
+  g('dp-words').textContent = numToWords(amt);
+  g('dp-mode').textContent = mode;
+  triggerSave();
+}
+function saveReceipt() {
+  const r = { type:'receipt', client:g('r-client').value, num:g('r-num').value, date:g('r-date').value, addr:g('r-addr').value, desc:g('r-desc').value, amt:g('r-amt').value, mode:g('r-mode').value, saved:new Date().toISOString() };
+  DB.receipts.unshift(r);
+  if (DB.receipts.length > 200) DB.receipts = DB.receipts.slice(0,200);
+  saveDB(); showToast('✅ Receipt saved!');
+}
+function resetReceipt() {
+  g('r-num').value = 'ICH/LEG/' + new Date().getFullYear() + '/' + String(Math.floor(Math.random()*900+100)).padStart(3,'0');
+  g('r-date').value = today(); g('r-client').value = ''; g('r-addr').value = ''; g('r-desc').value = ''; g('r-amt').value = '5000'; g('r-mode').value = 'NEFT / Bank Transfer';
+  updateReceipt();
+}
+function printReceipt() { updateReceipt(); openPrint(buildReceiptHTML()); }
+function buildReceiptHTML() {
+  const num = g('r-num').value;
+  const dv = g('r-date').value ? new Date(g('r-date').value).toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'}) : '—';
+  const client = g('r-client').value||'—', addr = g('r-addr').value||'—', desc = g('r-desc').value||'—';
+  const amt = parseFloat(g('r-amt').value)||0;
+  const mode = g('r-mode').options[g('r-mode').selectedIndex]?.text||'—';
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Fee Receipt</title>
+  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;padding:12mm;font-size:11px;color:#0A1F1A}
+  @page{margin:10mm;size:A4}@media print{body{padding:0}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
+  .h{background:linear-gradient(135deg,#002B22,#003D2E,#00614A);color:white;border-radius:8px;padding:15px 18px;text-align:center;margin-bottom:12px}
+  .hn{font-size:18px;font-weight:900;color:#E8BC5A}.hd{font-size:9px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+  .ha{font-size:9.5px;color:rgba(255,255,255,.5);margin-top:4px;line-height:1.5}
+  .hb{display:inline-block;background:rgba(196,151,42,.3);border:1px solid rgba(196,151,42,.5);color:#E8BC5A;padding:3px 13px;border-radius:14px;font-size:9px;font-weight:700;margin-top:7px}
+  .m{display:flex;justify-content:space-between;background:#E6F7F2;border-radius:6px;padding:8px 12px;margin-bottom:10px;font-size:11px}
+  .r{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #CCE8DC;font-size:11px}
+  .rl{color:#4A7A6A;font-weight:600;min-width:120px}.rv{font-weight:700;text-align:right}
+  .a{background:#003D2E;color:white;border-radius:7px;padding:9px 13px;text-align:center;margin:10px 0}
+  .an{font-size:20px;font-weight:900;color:#E8BC5A}.aw{font-size:9px;color:rgba(255,255,255,.6);margin-top:2px}
+  .s{display:flex;justify-content:space-between;margin-top:13px;padding-top:9px;border-top:1px dashed #9ECCBB;font-size:9.5px;color:#4A7A6A}
+  .sl{border-top:1px solid #0A1F1A;width:110px;padding-top:3px;text-align:center;font-size:9px}
+  .ft{text-align:center;margin-top:8px;font-size:8.5px;color:#9ECCBB;font-style:italic}
+  </style></head><body>
+  <div class="h"><div class="hn">Indrajit Vasant Chavan</div><div class="hd">Advocate &amp; Legal Consultant</div>
+  <div class="ha">9/21/3 Building, Mahasatta Chowk, Amarai Road, Ichalkaranji | 📞 +91 8055284444</div>
+  <div class="hb">⚖️ FEE RECEIPT (ORIGINAL)</div></div>
+  <div class="m"><div><div style="font-size:8.5px;font-weight:800;color:#4A7A6A;text-transform:uppercase">Receipt No.</div><strong>${esc(num)}</strong></div>
+  <div style="text-align:right"><div style="font-size:8.5px;font-weight:800;color:#4A7A6A;text-transform:uppercase">Date</div><strong>${esc(dv)}</strong></div></div>
+  <div class="r"><span class="rl">Client Name</span><span class="rv">${esc(client)}</span></div>
+  <div class="r"><span class="rl">Address</span><span class="rv">${esc(addr)}</span></div>
+  <div class="r"><span class="rl">Services Rendered</span><span class="rv" style="max-width:260px;text-align:right">${esc(desc)}</span></div>
+  <div class="a"><div class="an">₹${amt.toLocaleString('en-IN',{minimumFractionDigits:2})}</div><div class="aw">${esc(numToWords(amt))}</div></div>
+  <div class="r"><span class="rl">Payment Mode</span><span class="rv">${esc(mode)}</span></div>
+  <div class="s"><span>Received with thanks</span><div class="sl">For Indrajit Vasant Chavan<br>(Authorised Signatory)</div></div>
+  <div class="ft">Computer-generated receipt, valid without signature · Origo Application Services · Ichalkaranji</div>
+  </body></html>`;
+}
+
+// ══ SEC 138 — COURT FEE ════════════════════════════
+function calcCourtFee() {
+  const v = parseFloat(g('c-amt').value) || 0;
+  if (!v) { g('c-fee').value=''; g('c-seg').value=''; g('c-fee-box').style.display='none'; return; }
+  const segs = Math.ceil(v/10000);
+  const fee = Math.min(segs*200, 150000);
+  const capped = fee === 150000;
+  g('c-seg').value = segs; g('c-fee').value = '₹' + fee.toLocaleString('en-IN');
+  const box = g('c-fee-box');
+  box.style.display = 'block'; box.className = 'alert alert-s';
+  box.innerHTML = `<strong>Court Fee: ₹${fee.toLocaleString('en-IN')}</strong>${capped?' (Max cap ₹1,50,000 applied)':''} — ${segs} blocks × ₹200`;
+  triggerSave();
+}
+
+// ══ SEC 138 — LIMITATION ═══════════════════════════
+function autoCalc138() {
+  const cd=g('s-chqdate').value, cv=parseInt(g('s-valid').value)||90;
+  const rd=g('s-retdate').value, np=parseInt(g('s-notp').value)||30;
+  const ns=g('s-notserved').value;
+  g('s-validuntil').value = cd ? fmtD(addD(new Date(cd),cv)) : '';
+  g('s-lastnotice').value = rd ? fmtD(addD(new Date(rd),np)) : '';
+  if (ns) { const we=addD(new Date(ns),15); g('s-waitend').value=fmtD(we); g('s-lastcomp').value=fmtD(addD(we,30)); }
+  else { g('s-waitend').value=''; g('s-lastcomp').value=''; }
+  triggerSave();
+}
+function calcLim138() {
+  const ids = ['s-chqdate','s-depdate','s-retdate','s-notsent','s-notserved','s-compdate'];
+  for (const id of ids) { if (!g(id).value) { showToast('Fill all date fields'); return; } }
+  const cd=new Date(g('s-chqdate').value), cv=parseInt(g('s-valid').value)||90;
+  const dd=new Date(g('s-depdate').value), rd=new Date(g('s-retdate').value);
+  const np=parseInt(g('s-notp').value)||30;
+  const nsd=new Date(g('s-notsent').value), nse=new Date(g('s-notserved').value);
+  const cfd=new Date(g('s-compdate').value);
+  const exp=addD(cd,cv), lno=addD(rd,np), we=addD(nse,15), lc=addD(we,30);
+  const late = nsd>lno, inTime = cfd<=lc;
+  const dl = diffD(cfd, lc);
+
+  const res = g('s138-result');
+  const rows = [
+    ['Cheque Validity Expires', fmtD(exp), ''],
+    ['Last Date — Send Notice', fmtD(lno), late?'rrow-bad':'rrow-good'],
+    ['Notice Status', late?'⚠ Delayed':'✓ In Time', late?'rrow-bad':'rrow-good'],
+    ['15-Day Waiting Period Ends', fmtD(we), ''],
+    ['⚠ LAST DATE — File Complaint', fmtD(lc), ''],
+    ['Complaint Status', inTime?'✓ Within Limitation':'✗ Time Barred', inTime?'rrow-good':'rrow-bad'],
+    ['Days Remaining / Exceeded', (inTime?'+':'-')+Math.abs(dl)+' days', inTime?'rrow-good':'rrow-bad'],
+  ];
+  let alerts = '';
+  if (dd>exp) alerts += `<div class="alert alert-w">⚠ Cheque deposited after validity expired.</div>`;
+  if (late) alerts += `<div class="alert alert-d">✗ Notice sent beyond 30 days from dishonour date.</div>`;
+  if (cfd<we) alerts += `<div class="alert alert-w">⚠ Premature filing — before 15-day wait ended.</div>`;
+  alerts += `<div class="alert ${inTime?'alert-s':'alert-d'}">${inTime?'✓ Complaint is within limitation.':'✗ Complaint is TIME BARRED. File condonation under Sec. 473 CrPC.'}</div>`;
+
+  res.innerHTML = `
+    <div class="result-box ${inTime?'rb-safe':'rb-danger'}">
+      <div class="rb-title">${inTime?'✅ WITHIN LIMITATION':'❌ TIME BARRED'}</div>
+      <div class="rb-desc">${inTime?'Complaint filed '+Math.abs(dl)+' day(s) before deadline of '+fmtD(lc)+'.':'Complaint filed '+Math.abs(dl)+' day(s) AFTER deadline of '+fmtD(lc)+'. Condonation needed.'}</div>
+    </div>
+    <div class="card"><div class="card-hdr"><h3>📊 Results</h3></div>
+    <div class="card-body sm">${rows.map(([l,v,c])=>`<div class="rrow"><span class="rrow-lbl">${l}</span><span class="rrow-val ${c}">${v}</span></div>`).join('')}</div></div>
+    ${alerts}`;
+  res.style.display = 'flex';
+}
+function save138() {
+  const r = { type:'s138', client:g('s-client').value, caseno:g('s-caseno').value, chqdate:g('s-chqdate').value, depdate:g('s-depdate').value, retdate:g('s-retdate').value, notsent:g('s-notsent').value, notserved:g('s-notserved').value, compdate:g('s-compdate').value, amt:g('c-amt').value, courtfee:g('c-fee').value, saved:new Date().toISOString() };
+  DB.s138.unshift(r); if(DB.s138.length>200) DB.s138=DB.s138.slice(0,200);
+  saveDB(); showToast('✅ Sec. 138 case saved!');
+}
+function reset138() {
+  ['s-client','s-caseno','s-chqdate','s-depdate','s-retdate','s-notsent','s-notserved','s-compdate','s-validuntil','s-lastnotice','s-waitend','s-lastcomp','c-amt','c-fee','c-seg'].forEach(id=>g(id)&&(g(id).value=''));
+  g('s138-result').style.display='none'; g('c-fee-box').style.display='none';
+}
+function printS138() {
+  const res = g('s138-result');
+  if (res.style.display==='none') { showToast('Calculate first'); return; }
+  const rows=[['Client',g('s-client').value||'—'],['Case / CC No.',g('s-caseno').value||'—'],['Cheque Date',fmtDS(g('s-chqdate').value)],['Cheque Amount',g('c-amt').value?'₹'+parseFloat(g('c-amt').value).toLocaleString('en-IN'):'—'],['Court Fee',g('c-fee').value||'—'],['Date of Deposit',fmtDS(g('s-depdate').value)],['Date of Dishonour',fmtDS(g('s-retdate').value)],['Notice Sent',fmtDS(g('s-notsent').value)],['Notice Served',fmtDS(g('s-notserved').value)],['Complaint Filed',fmtDS(g('s-compdate').value)],['Last Date — Complaint',g('s-lastcomp').value||'—']];
+  openPrint(buildSummaryPrint('Section 138 NI Act — Limitation Summary', rows));
+}
+
+// ══ APPEAL ═════════════════════════════════════════
+function updateApLim() {
+  const sel = g('ap-type'); const v = sel.options[sel.selectedIndex].dataset.days;
+  if (v !== '0') g('ap-limdays').value = v;
+}
+function calcAppeal() {
+  const ov=g('ap-order').value, cav=g('ap-ccasked').value, crv=g('ap-ccrecd').value, fv=g('ap-filed').value;
+  if (!ov||!cav||!crv||!fv) { g('ap-result').style.display='none'; return; }
+  const ord=new Date(ov), ca=new Date(cav), cr=new Date(crv), fi=new Date(fv);
+  const lim=parseInt(g('ap-limdays').value)||30;
+  if (ca<ord||cr<ca||fi<ord) { showToast('Check date sequence'); return; }
+  const dOCC=diffD(ord,ca), dCCR=diffD(ca,cr), dTCC=diffD(ord,cr), dOF=diffD(ord,fi);
+  const origLast=addD(ord,lim), extP=lim+dTCC, extLast=addD(ord,extP);
+  const inTime=fi<=extLast, df=diffD(fi,extLast);
+
+  const res=g('ap-result');
+  const rows=[
+    ['Days: Order → CC Asked', dOCC+' days', ''],
+    ['Days: CC Asked → Received', dCCR+' days', ''],
+    ['Total CC Procurement Days', dTCC+' days (excluded)', ''],
+    ['Days: Order → Filing', dOF+' days', ''],
+    ['Original Limitation', lim+' days', ''],
+    ['Extended Period (with CC)', extP+' days', ''],
+    ['Original Last Date', fmtD(origLast), fi<=origLast?'rrow-good':'rrow-warn'],
+    ['Extended Last Date', fmtD(extLast), ''],
+    ['Filing Status', inTime?'✓ Within Limitation':'✗ Time Barred', inTime?'rrow-good':'rrow-bad'],
+    ['Days Remaining / Exceeded', (inTime?'+':'-')+Math.abs(df)+' days', inTime?'rrow-good':'rrow-bad'],
+  ];
+
+  res.innerHTML = `
+    <div class="result-box ${inTime?'rb-safe':'rb-danger'}">
+      <div class="rb-title">${inTime?'✅ WITHIN LIMITATION':'❌ TIME BARRED'}</div>
+      <div class="rb-desc">${inTime?'Filed '+Math.abs(df)+' day(s) before extended deadline of '+fmtD(extLast)+'.':'Filed '+Math.abs(df)+' day(s) AFTER extended deadline of '+fmtD(extLast)+'. Condonation needed.'}</div>
+    </div>
+    <div class="card"><div class="card-hdr"><h3>📊 Results</h3></div>
+    <div class="card-body sm">${rows.map(([l,v,c])=>`<div class="rrow"><span class="rrow-lbl">${l}</span><span class="rrow-val ${c}">${v}</span></div>`).join('')}</div></div>
+    ${fi<cr?'<div class="alert alert-w">⚠ Appeal filed before CC was received.</div>':''}`;
+  res.style.display = 'flex';
+  triggerSave();
+}
+function saveAppeal() {
+  const r = { type:'appeal', client:g('ap-client').value, caseno:g('ap-caseno').value, order:g('ap-order').value, ccasked:g('ap-ccasked').value, ccrecd:g('ap-ccrecd').value, filed:g('ap-filed').value, limdays:g('ap-limdays').value, casetype:g('ap-type').value, saved:new Date().toISOString() };
+  DB.appeals.unshift(r); if(DB.appeals.length>200) DB.appeals=DB.appeals.slice(0,200);
+  saveDB(); showToast('✅ Appeal record saved!');
+}
+function resetAppeal() {
+  ['ap-client','ap-caseno','ap-order','ap-ccasked','ap-ccrecd','ap-filed'].forEach(id=>g(id).value='');
+  g('ap-type').value='appeal'; g('ap-limdays').value=30; g('ap-result').style.display='none';
+}
+function printAppeal() {
+  const res=g('ap-result');
+  if(res.style.display==='none'){showToast('Calculate first');return;}
+  const rows=[['Client',g('ap-client').value||'—'],['Case / Appeal No.',g('ap-caseno').value||'—'],['Case Type',g('ap-type').options[g('ap-type').selectedIndex]?.text||'—'],['Order Date',fmtDS(g('ap-order').value)],['CC Asked Date',fmtDS(g('ap-ccasked').value)],['CC Received Date',fmtDS(g('ap-ccrecd').value)],['Appeal Filed Date',fmtDS(g('ap-filed').value)],['Limitation Period',g('ap-limdays').value+' days']];
+  openPrint(buildSummaryPrint('Appeal / Revision — Delay Calculation', rows));
+}
+
+// ══ ORDER 22 ═══════════════════════════════════════
+function setO22Role(btn) {
+  document.querySelectorAll('.rbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on'); o22Role = btn.dataset.role; calcO22();
+}
+function calcO22() {
+  const client=g('o22-client').value.trim(), deceased=g('o22-deceased').value.trim();
+  const dodStr=g('o22-dod').value, todayStr=g('o22-today').value||today();
+  const abatStr=g('o22-abatdate').value;
+  const res=g('o22-result');
+  if (!dodStr||!deceased||!o22Role) { res.style.display='none'; return; }
+  const dod=parseD(dodStr), todayD=parseD(todayStr);
+  const d30=addD(dod,30), d60=addD(dod,60), d90=addD(dod,90), d91=addD(dod,91);
+  const abatDate=abatStr?parseD(abatStr):null, d_sa=abatDate?addD(abatDate,60):null;
+  const dElapsed=diffD(dod,todayD), dLeft=diffD(todayD,d90);
+
+  let lvl='safe', ico='✅', title='', desc='';
+  if(dElapsed<0){lvl='warn';ico='❓';title='Future Date?';desc='Date of death is in future.';}
+  else if(dElapsed<=30){lvl='safe';ico='✅';title=`SAFE — ${dLeft} days remaining`;desc=`Within 30 days. File LR application immediately. Last date: ${fmtD(d90)}`;}
+  else if(dElapsed<=60){lvl='warn';ico='⚠️';title=`WARNING — ${dLeft} days remaining`;desc=`Between 30–60 days. Prepare and file LR application urgently. Deadline: ${fmtD(d90)}`;}
+  else if(dElapsed<=90){lvl='danger';ico='🚨';title=`URGENT — ONLY ${dLeft} DAYS LEFT`;desc=`File today under Order 22 Rule 4 CPC. Suit will ABATE on ${fmtD(d91)}.`;}
+  else{lvl='abated';ico='☠️';title='SUIT HAS ABATED';desc=`90 days expired. File under Order 22 Rule 9 CPC with Sec. 5 condonation.${abatDate?' Abatement order: '+fmtD(abatDate)+'. Set-aside deadline: '+fmtD(d_sa):''}` ;}
+
+  const cls = lvl==='safe'?'rb-safe':lvl==='warn'?'rb-warn':'rb-danger';
+  const tl = [
+    {dot:'tl-grey',ico:'💀',lbl:'Date of Death',date:dod,desc:`${esc(deceased)} (${esc(o22Role)}) — 90-day clock starts`,badge:null},
+    {dot:'tl-g',ico:'📬',lbl:'30-Day Window',date:d30,desc:'Inform court and opposite party. Draft LR application.',badge:todayD<=d30?{c:'tbg',t:'Within'}:todayD<=d90?{c:'tbo',t:'Passed'}:{c:'tbr',t:'Expired'}},
+    {dot:'tl-org',ico:'⏰',lbl:'60-Day Alert',date:d60,desc:'High urgency — collect documents, death certificate, family tree.',badge:todayD<=d60?{c:'tbg',t:'Not Yet'}:todayD<=d90?{c:'tbo',t:'Passed'}:{c:'tbr',t:'Expired'}},
+    {dot:'tl-gold',ico:'⚖️',lbl:'Day 90 — LAST DATE (Order 22 Rule 4 · Art. 120)',date:d90,desc:'ABSOLUTE LAST DATE to file LR substitution application.',badge:todayD<=d90?{c:'tbg',t:dLeft+' days left'}:{c:'tbr',t:'EXPIRED'}},
+    {dot:'tl-red',ico:'☠️',lbl:'Day 91 — Suit ABATES (Order 22 Rule 4(3))',date:d91,desc:`Suit ABATED against ${esc(deceased)} if application not filed.`,badge:todayD<d91?{c:'tbg',t:'Not yet'}:{c:'tbr',t:'ABATED'}},
+  ];
+  if(abatDate&&d_sa){
+    tl.push({dot:'tl-red',ico:'📜',lbl:'Abatement Order',date:abatDate,desc:'Court recorded abatement. 60-day period to set aside starts.',badge:{c:'tbo',t:'Order Date'}});
+    tl.push({dot:'tl-org',ico:'🔓',lbl:'60-Day Deadline — Set Aside (Rule 9 · Art. 121)',date:d_sa,desc:'Last date to file set aside application + Sec. 5 condonation.',badge:todayD<=d_sa?{c:'tbo',t:diffD(todayD,d_sa)+' days left'}:{c:'tbr',t:'EXPIRED'}});
+  }
+  tl.sort((a,b)=>a.date-b.date);
+
+  const tlHTML = `<div class="tl">${tl.map(e=>`<div class="tl-item"><div class="tl-dot ${e.dot}">${e.ico}</div><div class="tl-content"><div class="tl-label">${esc(e.lbl)}</div><div class="tl-date">${fmtD(e.date)}</div><div class="tl-desc">${e.desc}</div>${e.badge?`<span class="tl-badge ${e.badge.c}">${e.badge.t}</span>`:''}</div></div>`).join('')}</div>`;
+  const daysG = `<div class="days-row"><div class="day-box"><div class="day-num ${dElapsed<=90?'dg':'dr'}">${Math.max(0,dElapsed)}</div><div class="day-lbl">Days Elapsed</div></div><div class="day-box"><div class="day-num ${dLeft>=30?'dg':dLeft>=0?'dw':'dr'}">${Math.max(0,dLeft)}</div><div class="day-lbl">Days Remaining</div></div><div class="day-box"><div class="day-num dg">90</div><div class="day-lbl">Total Period</div></div></div>`;
+
+  res.innerHTML = `
+    <div class="result-box ${cls}"><div class="rb-title">${ico} ${title}</div><div class="rb-desc">${desc}</div></div>
+    ${daysG}
+    <div class="card"><div class="card-hdr"><h3>📅 Critical Deadlines</h3></div><div class="card-body sm">${tlHTML}</div></div>`;
+  res.style.display = 'flex';
+  triggerSave();
+}
+function saveO22() {
+  const r = { type:'order22', client:g('o22-client').value, casenum:g('o22-casenum').value, court:g('o22-court').value, opp:g('o22-opp').value, nature:g('o22-nature').value, deceased:g('o22-deceased').value, role:o22Role, dod:g('o22-dod').value, abatdate:g('o22-abatdate').value, notes:g('o22-notes').value, saved:new Date().toISOString() };
+  DB.order22.unshift(r); if(DB.order22.length>200) DB.order22=DB.order22.slice(0,200);
+  saveDB(); showToast('✅ Order 22 case saved!');
+}
+function resetO22() {
+  ['o22-client','o22-casenum','o22-court','o22-opp','o22-nature','o22-deceased','o22-dod','o22-abatdate','o22-notes'].forEach(id=>{const el=g(id);if(el)el.value='';});
+  o22Role=''; document.querySelectorAll('.rbtn').forEach(b=>b.classList.remove('on')); g('o22-result').style.display='none';
+}
+function printO22() {
+  const res=g('o22-result');
+  if(res.style.display==='none'){showToast('Calculate first');return;}
+  const dod=parseD(g('o22-dod').value), today2=parseD(g('o22-today').value||today());
+  const d90=addD(dod,90), d91=addD(dod,91);
+  const dElapsed=diffD(dod,today2), dLeft=diffD(today2,d90);
+  const rows=[['Client / Party',g('o22-client').value||'—'],['Case Number',g('o22-casenum').value||'—'],['Court',g('o22-court').value||'—'],['Opposite Party',g('o22-opp').value||'—'],['Deceased Name',g('o22-deceased').value||'—'],['Role in Case',o22Role||'—'],['Date of Death',fmtDS(g('o22-dod').value)],['Day 90 — Last Date for LR Application',fmtD(d90)],['Day 91 — Suit Abates',fmtD(d91)],['Days Elapsed',dElapsed+' days'],['Days Remaining (to Day 90)',Math.max(0,dLeft)+' days']];
+  openPrint(buildSummaryPrint('Order 22 CPC — LR Substitution Summary', rows));
+}
+
+// ══ PRINT ══════════════════════════════════════════
+function buildSummaryPrint(titleStr, rows) {
+  const now = new Date().toLocaleString('en-IN');
+  const rowsHTML = rows.map(([l,v])=>`<tr><td style="padding:5px 9px;border-bottom:1px solid #CCE8DC;color:#4A7A6A;font-weight:600">${esc(l)}</td><td style="padding:5px 9px;border-bottom:1px solid #CCE8DC;font-weight:700;text-align:right">${esc(v)}</td></tr>`).join('');
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${esc(titleStr)}</title>
+  <style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;padding:10mm;font-size:11px;color:#0A1F1A}
+  @page{margin:10mm;size:A4}@media print{body{padding:0}*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}}
+  .h{background:linear-gradient(135deg,#002B22,#003D2E,#00614A);color:white;border-radius:7px;padding:13px 16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}
+  .hn{font-size:15px;font-weight:900;color:#E8BC5A}.hs{font-size:8.5px;color:rgba(255,255,255,.6);margin-top:2px}
+  .title{font-size:14px;font-weight:800;color:#003D2E;margin-bottom:9px;padding-bottom:6px;border-bottom:2px solid #CCE8DC}
+  table{width:100%;border-collapse:collapse}
+  .ft{margin-top:12px;padding-top:8px;border-top:1px dashed #9ECCBB;display:flex;justify-content:space-between;font-size:8.5px;color:#4A7A6A}
+  .sl{border-top:1px solid #0A1F1A;width:110px;padding-top:3px;text-align:center;font-size:8.5px}
+  </style></head><body>
+  <div class="h"><div><div class="hn">Adv. Indrajit Vasant Chavan</div><div class="hs">Advocate · Ichalkaranji, Maharashtra · 8055284444</div></div>
+  <div style="text-align:right;font-size:8.5px;color:rgba(255,255,255,.5)">${esc(now)}</div></div>
+  <div class="title">${esc(titleStr)}</div>
+  <table><tbody>${rowsHTML}</tbody></table>
+  <div class="ft"><span>Adv. Indrajit Vasant Chavan · Ichalkaranji · Origo Application Services</span><div class="sl">Signature &amp; Seal</div></div>
+  </body></html>`;
+}
+function printCurrent() {
+  if(currentTab==='receipt') printReceipt();
+  else if(currentTab==='s138') printS138();
+  else if(currentTab==='appeal') printAppeal();
+  else if(currentTab==='order22') printO22();
+  else showToast('Select a tool first');
+}
+function openPrint(html) {
+  const win = window.open('','_blank','width=860,height=1000');
+  if (!win) { alert('Popup blocked! Allow popups for this page.'); return; }
+  win.document.write(html); win.document.close();
+  setTimeout(()=>{ try{win.focus();win.print();}catch(e){} }, 700);
+}
+
+// ══ BACKUP ═════════════════════════════════════════
+function openBackup() { g('imp-json').value=''; const fi=g('file-import'); if(fi)fi.value=''; const st=g('file-import-status'); if(st)st.textContent=''; g('m-backup').classList.remove('hidden'); }
+function exportAll() {
+  const exportData = {
+    ...DB,
+    exported: new Date().toISOString(),
+    appVersion: 'Legal_Workspace_v6_Firebase',
+    totalRecords: (DB.receipts||[]).length + (DB.s138||[]).length + (DB.appeals||[]).length + (DB.order22||[]).length
+  };
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(exportData,null,2)],{type:'application/json'}));
+  a.download = 'AdvChavan_LegalWorkspace_' + today() + '.json'; a.click();
+  showToast('✅ Backup exported! ' + exportData.totalRecords + ' records.');
+}
+function importAll() {
+  try {
+    const d = JSON.parse(g('imp-json').value.trim());
+    applyImport(d);
+  } catch(e) { showToast('❌ Invalid JSON: ' + e.message); }
+}
+
+function importFromFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const status = g('file-import-status');
+  if (status) status.textContent = 'Reading file...';
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const d = JSON.parse(e.target.result);
+      const total = applyImport(d);
+      if (status) status.textContent = '✅ ' + total + ' records imported from ' + file.name;
+    } catch(err) {
+      if (status) status.textContent = '❌ Invalid file: ' + err.message;
+    }
+  };
+  reader.onerror = function() {
+    if (status) status.textContent = '❌ Error reading file.';
+  };
+  reader.readAsText(file);
+}
+
+function applyImport(d) {
+  if (!d) { showToast('❌ No data to import'); return 0; }
+  let cnt = 0;
+  if (d.receipts) { DB.receipts = [...DB.receipts, ...d.receipts].slice(0, 200); cnt += d.receipts.length; }
+  if (d.s138) { DB.s138 = [...DB.s138, ...d.s138].slice(0, 200); cnt += d.s138.length; }
+  if (d.appeals) { DB.appeals = [...DB.appeals, ...d.appeals].slice(0, 200); cnt += d.appeals.length; }
+  if (d.order22) { DB.order22 = [...DB.order22, ...d.order22].slice(0, 200); cnt += d.order22.length; }
+  saveDB(); closeModal('m-backup'); showToast('✅ Data restored! ' + cnt + ' records imported.');
+  return cnt;
+}
+
+// ══ FIREBASE CLOUD BACKUP / RESTORE ════════════════
+async function firebaseCloudBackup() {
+  if (!firebaseAvailable || !firestoreDB) {
+    showToast('❌ Firebase not available. Check internet connection.');
+    return;
+  }
+  const btn = g('btn-cloud-backup');
+  if (btn) { btn.disabled = true; btn.textContent = '☁️ Uploading...'; }
+  try {
+    const payload = {
+      receipts: DB.receipts || [],
+      s138: DB.s138 || [],
+      appeals: DB.appeals || [],
+      order22: DB.order22 || [],
+      lastBackup: new Date().toISOString(),
+      device: navigator.userAgent
+    };
+    await firestoreDB.collection('backups').doc('legal_workspace_data').set(payload);
+    const total = (DB.receipts||[]).length + (DB.s138||[]).length + (DB.appeals||[]).length + (DB.order22||[]).length;
+    showToast('☁️ Cloud backup complete! ' + total + ' records saved to Firebase.');
+  } catch(e) {
+    showToast('❌ Cloud backup failed: ' + e.message);
+    console.error('Firebase backup error:', e);
+  }
+  if (btn) { btn.disabled = false; btn.textContent = '☁️ Upload to Cloud'; }
+}
+
+async function firebaseCloudRestore() {
+  if (!firebaseAvailable || !firestoreDB) {
+    showToast('❌ Firebase not available. Check internet connection.');
+    return;
+  }
+  if (!confirm('⚠ This will OVERWRITE all local data with cloud data. Continue?')) return;
+  const btn = g('btn-cloud-restore');
+  if (btn) { btn.disabled = true; btn.textContent = '☁️ Downloading...'; }
+  try {
+    const doc = await firestoreDB.collection('backups').doc('legal_workspace_data').get();
+    if (!doc.exists) {
+      showToast('⚠ No cloud backup found.');
+      if (btn) { btn.disabled = false; btn.textContent = '☁️ Download from Cloud'; }
+      return;
+    }
+    const d = doc.data();
+    if (d.receipts) DB.receipts = d.receipts.slice(0, 200);
+    if (d.s138) DB.s138 = d.s138.slice(0, 200);
+    if (d.appeals) DB.appeals = d.appeals.slice(0, 200);
+    if (d.order22) DB.order22 = d.order22.slice(0, 200);
+    saveDB();
+    const total = (DB.receipts||[]).length + (DB.s138||[]).length + (DB.appeals||[]).length + (DB.order22||[]).length;
+    showToast('☁️ Cloud restore complete! ' + total + ' records loaded.');
+  } catch(e) {
+    showToast('❌ Cloud restore failed: ' + e.message);
+    console.error('Firebase restore error:', e);
+  }
+  if (btn) { btn.disabled = false; btn.textContent = '☁️ Download from Cloud'; }
+}
+
+// ══ RECORDS ════════════════════════════════════════
+let currentPreviewType = null, currentPreviewIdx = null;
+
+function openRecords() {
+  recFilter = 'all'; g('rec-search').value=''; renderRecords();
+  g('m-records').classList.remove('hidden');
+}
+function filterRecs(f) {
+  recFilter = f; renderRecords();
+  ['all','receipt','s138','appeal','order22'].forEach(k=>{
+    const b = g('rf-'+k); if(!b)return;
+    b.className = k===f ? 'btn btn-p' : 'btn btn-s';
+    b.style.padding='4px 11px'; b.style.fontSize='10px'; b.style.borderRadius='12px';
+  });
+}
+function renderRecords() {
+  const q = (g('rec-search').value||'').toLowerCase().trim();
+  let all = [];
+  DB.receipts.forEach((r,i)=>all.push({type:'receipt',idx:i,rec:r}));
+  DB.s138.forEach((r,i)=>all.push({type:'s138',idx:i,rec:r}));
+  DB.appeals.forEach((r,i)=>all.push({type:'appeal',idx:i,rec:r}));
+  DB.order22.forEach((r,i)=>all.push({type:'order22',idx:i,rec:r}));
+  if (recFilter!=='all') all = all.filter(x=>x.type===recFilter);
+  if (q) all = all.filter(x=>{
+    const r=x.rec;
+    return (r.client||r.caseno||r.casenum||r.num||r.deceased||r.party||r.opp||'').toLowerCase().includes(q);
+  });
+  all.sort((a,b)=>new Date(b.rec.saved||0)-new Date(a.rec.saved||0));
+
+  const con=g('records-list'), emp=g('records-empty');
+  const cnt=g('rec-count'); if(cnt) cnt.textContent=all.length+' record'+(all.length!==1?'s':'');
+
+  if (!all.length) { con.innerHTML=''; emp.style.display='block'; return; }
+  emp.style.display='none';
+
+  const TAGS={receipt:{lbl:'Receipt',cls:'rt-receipt'},s138:{lbl:'Sec. 138',cls:'rt-s138'},appeal:{lbl:'Appeal',cls:'rt-appeal'},order22:{lbl:'Order 22',cls:'rt-order22'}};
+  con.innerHTML = all.map(item=>{
+    const {type,idx,rec:r}=item;
+    const tg=TAGS[type];
+    const main=r.client||r.caseno||r.casenum||r.num||'Record';
+    const sub=[];
+    if(r.caseno||r.casenum)sub.push(r.caseno||r.casenum);
+    if(r.num)sub.push('Receipt: '+r.num);
+    if(r.dod)sub.push('Death: '+fmtDS(r.dod));
+    if(r.chqdate)sub.push('Cheque: '+fmtDS(r.chqdate));
+    if(r.order)sub.push('Order: '+fmtDS(r.order));
+    if(r.date)sub.push('Date: '+fmtDS(r.date));
+    if(r.saved)sub.push(new Date(r.saved).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'}));
+    return `<div class="rec-item" onclick="viewRecord('${type}',${idx})">
+      <div style="flex:1;min-width:0">
+        <div class="rec-title"><span class="rec-tag ${tg.cls}" style="margin-right:6px">${tg.lbl}</span>${esc(main)}</div>
+        <div class="rec-meta">${sub.join(' · ')}</div>
+      </div>
+      <div class="rec-acts" onclick="event.stopPropagation()">
+        <button class="rba rba-v" onclick="viewRecord('${type}',${idx})">👁️ View</button>
+        <button class="rba rba-e" onclick="loadRecord('${type}',${idx})">✏️ Edit</button>
+        <button class="rba rba-d" onclick="deleteRecord('${type}',${idx},event)">🗑️</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function viewRecord(type, idx) {
+  const arr={receipt:DB.receipts,s138:DB.s138,appeal:DB.appeals,order22:DB.order22}[type];
+  if(!arr||!arr[idx])return;
+  currentPreviewType=type; currentPreviewIdx=idx;
+  const r=arr[idx];
+  const TITLES={receipt:'🧾 Fee Receipt',s138:'📄 Sec. 138 NI Act',appeal:'⏱️ Appeal / Revision',order22:'☠️ Order 22 LR'};
+  g('preview-modal-title').textContent=TITLES[type];
+
+  const row=(lbl,val)=>val?`<div class="prow"><span class="prow-lbl">${esc(lbl)}</span><span class="prow-val">${esc(String(val))}</span></div>`:'';
+  const sec=t=>`<div class="psec">${esc(t)}</div>`;
+  let html='';
+
+  if(type==='receipt'){
+    const amt=parseFloat(r.amt)||0;
+    html=`<div style="background:linear-gradient(135deg,var(--t1),var(--t2),var(--t3));color:white;border-radius:9px;padding:13px 16px;text-align:center;margin-bottom:12px">
+      <div style="font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--gold2)">Indrajit Vasant Chavan</div>
+      <div style="font-size:8.5px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1px;margin-top:2px">Advocate &amp; Legal Consultant</div>
+      <div style="display:inline-block;background:rgba(196,151,42,.25);border:1px solid rgba(196,151,42,.5);color:var(--gold2);padding:2px 11px;border-radius:13px;font-size:9px;font-weight:700;margin-top:6px">⚖️ FEE RECEIPT</div>
+    </div>
+    ${row('Receipt No.',r.num)}${row('Date',fmtDS(r.date))}${row('Client',r.client)}${row('Address',r.addr)}${row('Services',r.desc)}
+    <div style="background:var(--t2);color:white;border-radius:7px;padding:9px;text-align:center;margin:9px 0">
+      <div style="font-family:'Cinzel',serif;font-size:18px;font-weight:700;color:var(--gold2)">₹${amt.toLocaleString('en-IN',{minimumFractionDigits:2})}</div>
+      <div style="font-size:9px;color:rgba(255,255,255,.6);margin-top:2px">${numToWords(amt)}</div>
+    </div>${row('Payment Mode',r.mode)}`;
+  } else if(type==='s138'){
+    html=sec('Case Details')+row('Client',r.client)+row('Case / CC No.',r.caseno)
+      +sec('Dates')+row('Cheque Date',fmtDS(r.chqdate))+row('Deposit Date',fmtDS(r.depdate))+row('Dishonour Date',fmtDS(r.retdate))+row('Notice Sent',fmtDS(r.notsent))+row('Notice Served',fmtDS(r.notserved))+row('Complaint Filed',fmtDS(r.compdate))
+      +sec('Court Fee')+row('Cheque Amount',r.amt?'₹'+parseFloat(r.amt).toLocaleString('en-IN'):'—')+row('Court Fee',r.courtfee);
+  } else if(type==='appeal'){
+    html=sec('Case Details')+row('Client',r.client)+row('Case / Appeal No.',r.caseno)+row('Case Type',r.casetype)
+      +sec('Dates')+row('Order Date',fmtDS(r.order))+row('CC Asked Date',fmtDS(r.ccasked))+row('CC Received Date',fmtDS(r.ccrecd))+row('Filed Date',fmtDS(r.filed))+row('Limitation Period',r.limdays+' days');
+  } else if(type==='order22'){
+    const dod=r.dod?parseD(r.dod):null, td=parseD(today());
+    const d90=dod?addD(dod,90):null, dEl=dod?diffD(dod,td):null, dLft=dEl!==null?90-dEl:null;
+    const sc=dEl===null?'var(--muted)':dEl<=30?'var(--t3)':dEl<=60?'#8A6000':dEl<=90?'#C46200':'var(--red)';
+    const st=dEl===null?'—':dEl<=30?`✅ SAFE (${dLft} days left)`:dEl<=60?`⚠ WARNING (${dLft} days left)`:dEl<=90?`🚨 URGENT (${dLft} days left)`:'☠ ABATED';
+    html=sec('Case Details')+row('Client',r.client)+row('Case Number',r.casenum)+row('Court',r.court)+row('Opposite Party',r.opp)
+      +sec('Deceased Party')+row('Deceased',r.deceased)+row('Role',r.role)+row('Date of Death',fmtDS(r.dod))+row('Day 90 — Last Date',d90?fmtD(d90):'')
+      +`<div style="background:${sc};color:white;border-radius:7px;padding:7px 11px;margin:8px 0;font-size:13px;font-weight:800;text-align:center">${st}</div>`
+      +row('Days Elapsed',dEl!==null?dEl+' days':'')+row('Days Remaining',dLft!==null?Math.max(0,dLft)+' days':'');
+  }
+  html+=`<div style="margin-top:13px;padding:9px 11px;background:var(--tl);border-radius:7px;font-size:11px;color:var(--mid)">💡 Click <strong>Load &amp; Edit</strong> to open in form and modify details.</div>`;
+  g('preview-body').innerHTML=html;
+  g('m-preview').classList.remove('hidden');
+}
+
+function editCurrentRecord() {
+  if(currentPreviewType===null)return;
+  loadRecord(currentPreviewType,currentPreviewIdx);
+}
+function printCurrentRecord() {
+  if(currentPreviewType===null)return;
+  closeModal('m-preview');
+  loadRecord(currentPreviewType,currentPreviewIdx);
+  setTimeout(()=>{
+    if(currentPreviewType==='receipt')printReceipt();
+    else if(currentPreviewType==='s138')printS138();
+    else if(currentPreviewType==='appeal')printAppeal();
+    else if(currentPreviewType==='order22')printO22();
+  },300);
+}
+
+function loadRecord(type, idx) {
+  const arr={receipt:DB.receipts,s138:DB.s138,appeal:DB.appeals,order22:DB.order22}[type];
+  if(!arr||!arr[idx])return;
+  const r=arr[idx];
+  currentPreviewType=type; currentPreviewIdx=idx;
+  closeModal('m-preview'); closeModal('m-records');
+
+  if(type==='receipt'){
+    goTab('receipt');
+    setTimeout(()=>{
+      if(r.num)g('r-num').value=r.num; if(r.date)g('r-date').value=r.date;
+      if(r.client)g('r-client').value=r.client; if(r.addr)g('r-addr').value=r.addr;
+      if(r.desc)g('r-desc').value=r.desc; if(r.amt)g('r-amt').value=r.amt;
+      if(r.mode)g('r-mode').value=r.mode; updateReceipt();
+    },100);
+  } else if(type==='s138'){
+    goTab('s138');
+    setTimeout(()=>{
+      if(r.client)g('s-client').value=r.client; if(r.caseno)g('s-caseno').value=r.caseno;
+      if(r.chqdate)g('s-chqdate').value=r.chqdate; if(r.depdate)g('s-depdate').value=r.depdate;
+      if(r.retdate)g('s-retdate').value=r.retdate; if(r.notsent)g('s-notsent').value=r.notsent;
+      if(r.notserved)g('s-notserved').value=r.notserved; if(r.compdate)g('s-compdate').value=r.compdate;
+      if(r.amt)g('c-amt').value=r.amt;
+      autoCalc138(); calcCourtFee();
+    },100);
+  } else if(type==='appeal'){
+    goTab('appeal');
+    setTimeout(()=>{
+      if(r.client)g('ap-client').value=r.client; if(r.caseno)g('ap-caseno').value=r.caseno;
+      if(r.order)g('ap-order').value=r.order; if(r.ccasked)g('ap-ccasked').value=r.ccasked;
+      if(r.ccrecd)g('ap-ccrecd').value=r.ccrecd; if(r.filed)g('ap-filed').value=r.filed;
+      if(r.limdays)g('ap-limdays').value=r.limdays; if(r.casetype)g('ap-type').value=r.casetype;
+      calcAppeal();
+    },100);
+  } else if(type==='order22'){
+    goTab('order22');
+    setTimeout(()=>{
+      if(r.client)g('o22-client').value=r.client; if(r.casenum||r.caseno)g('o22-casenum').value=r.casenum||r.caseno;
+      if(r.court)g('o22-court').value=r.court; if(r.opp)g('o22-opp').value=r.opp;
+      if(r.nature)g('o22-nature').value=r.nature; if(r.deceased)g('o22-deceased').value=r.deceased;
+      if(r.dod)g('o22-dod').value=r.dod; if(r.abatdate)g('o22-abatdate').value=r.abatdate;
+      if(r.notes)g('o22-notes').value=r.notes;
+      if(r.role){o22Role=r.role;document.querySelectorAll('.rbtn').forEach(b=>{b.classList.remove('on');if(b.dataset.role===r.role)b.classList.add('on');});}
+      calcO22();
+    },100);
+  }
+  showToast('✅ Record loaded — edit and save');
+}
+
+function deleteRecord(type, idx, e) {
+  if(e)e.stopPropagation();
+  const arr={receipt:DB.receipts,s138:DB.s138,appeal:DB.appeals,order22:DB.order22}[type];
+  if(!arr||!arr[idx])return;
+  const lbl=arr[idx].client||arr[idx].caseno||arr[idx].casenum||arr[idx].num||'this record';
+  if(!confirm('Delete "'+lbl+'"?\nThis cannot be undone.'))return;
+  arr.splice(idx,1); saveDB(); renderRecords(); showToast('🗑️ Deleted.');
+}
+
+// ══ INIT ═══════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', function() {
+  // Load data
+  loadDB();
+
+  // Load data from server if available
+  fetch('/api/load').then(r=>r.json()).then(d=>{
+    if(d&&(d.receipts||d.s138||d.appeals||d.order22)){
+      if(d.receipts)DB.receipts=d.receipts;
+      if(d.s138)DB.s138=d.s138;
+      if(d.appeals)DB.appeals=d.appeals;
+      if(d.order22)DB.order22=d.order22;
+    }
+  }).catch(()=>{}); // silent fail — works offline too
+
+  // Default values
+  const td = today();
+  g('r-date').value = td; g('o22-today').value = td;
+  g('r-num').value = 'ICH/LEG/' + new Date().getFullYear() + '/001';
+  updateReceipt();
+
+  // Language
+  currentLang = localStorage.getItem('adv_ic_lang') || 'en';
+  setLang(currentLang);
+
+  // Auto-save every 5s
+  setInterval(saveDB, 5000);
+
+  // Close modals on backdrop click
+  document.querySelectorAll('.overlay').forEach(ov=>ov.addEventListener('click',e=>{if(e.target===ov)ov.classList.add('hidden');}));
+
+  // Notify loaded records
+  const total = (DB.receipts||[]).length + (DB.s138||[]).length + (DB.appeals||[]).length + (DB.order22||[]).length;
+  if(total>0) setTimeout(()=>showToast('📂 '+total+' records loaded'), 1000);
+});
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"1954b47c125f43f8b4338b3c4f804e4f","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
